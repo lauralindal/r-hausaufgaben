@@ -1,7 +1,8 @@
 ---
 output:
-  pdf_document: default
+  word_document: default
   html_notebook: default
+  pdf_document: default
   html_document: default
 ---
 
@@ -152,8 +153,44 @@ b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit de
     (i) für Frauen
     (ii) für Männer
     (iii) für jede der drei Klassen des Merkmals `Pclass`
+    
+    ```{r}
+    # we need the row-wise proportion, ie, the proportion of each sex that survived, as separate groups. 
+    # So we need to tell the command to give us proportions in the 1st dimension which stands for the rows
+    # http://trevorstephens.com/kaggle-titanic-tutorial/r-part-2-the-gender-class-model/
+    
+    f_gender <- prop.table(table(titanic_data$Sex, titanic_data$Survived), 1)*100
+    f_women <- f_gender[1,]
+    f_men <- f_gender[2,]
+    f_class <- prop.table(table(titanic_data$Pclass, titanic_data$Survived), 1)*100
+    f_1 <- f_class[1,]
+    f_2 <- f_class[2,]
+    f_3 <- f_class[3,]
+    
+    barplot(f_women, names.arg = c("Nein", "Ja"), main="Überlebenschancen Frauen", 
+            xlab="Überlebt?", ylab ="Prozent")
+    barplot(f_men, names.arg = c("Nein", "Ja"), main="Überlebenschancen Männer", 
+            xlab="Überlebt?", ylab ="Prozent")
+    barplot(f_1, names.arg = c("Nein", "Ja"), main="Überlebenschancen Erste Klasse", 
+            xlab="Überlebt?", ylab ="Prozent")
+    barplot(f_2, names.arg = c("Nein", "Ja"), main="Überlebenschancen Zweite Klasse", 
+            xlab="Überlebt?", ylab ="Prozent")
+    barplot(f_3, names.arg = c("Nein", "Ja"), main="Überlebenschancen Dritte Klasse", 
+            xlab="Überlebt?", ylab ="Prozent")
+    
+    # weitere Überlegungen bezüglich der Verhältnisse
+    h_gender <- table(titanic_data$Sex)
+    h_gender
+    f_gender_relative_to_all <- prop.table(table(titanic_data$Sex, titanic_data$Survived))*100
+    f_gender_relative_to_all
+    
+    ```
+    
  
 c) Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Passagiergruppen lernen!
+
+    Wir sehen, dass insgesamt mehr Passagiere gestorben sind als überlebt haben. Innerhalb der Gruppe der Frauen gab es mehr Überlebende als Verstorbene - Frauen      hatten also eine recht gute Überlebenschance. Innerhalb der Gruppe der Männer gab es mehr Verstorbene als Überlebende - Männer hatten also eher schlechte          Überlebenschancen. Für die Passagiere der ersten Klasse waren die Überlebenschancen recht gut, für die zweite Klasse fast 50/50, für die dritte Klasse             schlecht. (Genauere Angaben?)
+
 
 ## Aufgabe 3
 
@@ -163,7 +200,17 @@ Erstellen Sie die Histogramme in a) und b) mit der Gruppierung [0,5), [5,10), [1
 
 a) Erzeugen Sie ein Histogramm absoluter Häufigkeiten des Merkmals `Age`! 
 
+    ```{r}
+    bins <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80)
+    hist(titanic_data$Age, breaks = bins, main = "Altersgruppen der Passagiere", xlab = "Alter", ylab = "Anzahl")
+    ```
+
+
 b) Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals `Age` für die Überlebenden und die Gestorbenen! 
+
+```{r}
+```
+
 
 c) Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Altersgruppen lernen!
 
