@@ -129,12 +129,24 @@ d) Fügen Sie eine Spalte namens `Survived2` zum Data-Frame `titanic_data` hinzu
 
 e) Bestimmen Sie die Anzahl fehlender Werte des Merkmals `Age` mit R-Befehlen!
 
+    
+    ```{r}
+    sum(is.na(titanic_data$Age))    
+    ```
+
 
 ## Aufgabe 2
 
 Geben Sie den Diagrammen in den folgenden Aufgaben sinnvolle Titel und beschriften Sie alle Axen!
 
 a) Erzeugen Sie ein Balkendiagramm des Merkmals `Survived2`, welches die absolute Anzahl der Überlebenden und Gestorbenen gegenüberstellt!
+
+    ```{r}
+    h <- table(titanic_data$Survived2)
+    barplot(h, names.arg = c("Nein", "Ja"), main="Konsequenzen des Titanic Unglücks", 
+            xlab="Überlebt?", ylab ="Anzahl", ylim = c(0, 600))
+    ```
+
 
 b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit den relativen Häufigkeiten in Prozent:
     (i) für Frauen
