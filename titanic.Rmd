@@ -71,47 +71,61 @@ Die Merkmale sind
 
 a) Lesen Sie den Datensatz `titanic_data.csv` in R ein und weisen Sie ihn der Variablen `titanic_data` zu! 
 
-```{r}
-titanic_data <- read.csv("titanic_data.csv")
-View(titanic_data)
-str(titanic_data)
-```
+    ```{r}
+    titanic_data <- read.csv("titanic_data.csv")
+    View(titanic_data) # Zusätzlicher Eindruck
+    str(titanic_data) # Zusätzlicher Eindruck
+    ```
 
 
 b) Bestimmen Sie für jedes Merkmal, ob es qualitativ/quantitativ ist und auf welcher Skala es definiert ist (Nominal-, Ordinal- oder Kardinalskala)! 
 
-```{r}
-library(knitr)
-Merkmale <- c("PassengerId", "Survived", "Passenger Class", "Name", 
-              "Sex", "Age", "# of Sibling", "# of Parents/Children", 
-              "Ticket #", "Fare", "Cabin", "Port of Embarkation")
-QualiQuanti <- c("quantitativ", "quali?", "quali?", "qualitativ", 
-                 "qualitativ", "quantitativ", "quantitativ", "quantitativ", 
-                 "qualitativ", "quantitativ", "quali?", "qualitativ")
-Skala <- c("Kardinal", "Nominal", "Ordinal?", "Nominal", 
-           "Nominal", "Kardinal", "Kardinal", "Kardinal", 
-           "Nominal?", "Kardinal", "Ordinal?", "Nominal?")
-
-Titanic_Merkmale <- data.frame(Merkmale, QualiQuanti, Skala)
-kable(Titanic_Merkmale)
-```
+    ```{r}
+    library(knitr)
+    Merkmale <- c("PassengerId", "Survived", "Passenger Class", "Name", 
+                  "Sex", "Age", "# of Sibling", "# of Parents/Children", 
+                  "Ticket #", "Fare", "Cabin", "Port of Embarkation")
+    QualiQuanti <- c("quantitativ", "quali?", "quali?", "qualitativ", 
+                     "qualitativ", "quantitativ", "quantitativ", "quantitativ", 
+                     "qualitativ", "quantitativ", "quali?", "qualitativ")
+    Skala <- c("Kardinal", "Nominal", "Ordinal?", "Nominal", 
+               "Nominal", "Kardinal", "Kardinal", "Kardinal", 
+               "Nominal?", "Kardinal", "Ordinal?", "Nominal?")
+    
+    Titanic_Merkmale <- data.frame(Merkmale, QualiQuanti, Skala)
+    kable(Titanic_Merkmale)
+    ```
 
 c) Bestimmen Sie die Anzahl der Passagiere im Datensatz mit R-Befehlen! 
 
-```{r}
-dim(titanic_data) # Gibt die Dimensionen an
-nrow(titanic_data) # Zählt Reihen
-```
+    ```{r}
+    dim(titanic_data) # Gibt die Dimensionen an
+    nrow(titanic_data) # Zählt Reihen
+    ```
 
 d) Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!
 
-```{r}
-names(titanic_data) # Bezeichungen der Merkmale
-ncol(titanic_data) # Zählt Spalten
-```
+    ```{r}
+    names(titanic_data) # Bezeichungen der Merkmale
+    ncol(titanic_data) # Zählt Spalten
+    ```
 
 
 d) Fügen Sie eine Spalte namens `Survived2` zum Data-Frame `titanic_data` hinzu, welche die Überlebenden mit dem String `"yes"` und alle anderen mit `"no"` kodiert! 
+    
+    ```{r}
+    titanic_data[, "Survived2"] <- 0
+    for(i in 1:891){
+      if(titanic_data[i, 2]==1){
+        titanic_data[i, 13] <- "yes"
+      }
+      else {
+        titanic_data[i, 13] <- "no"
+      }
+    }
+    View(titanic_data)
+    ```
+
 
 e) Bestimmen Sie die Anzahl fehlender Werte des Merkmals `Age` mit R-Befehlen!
 
