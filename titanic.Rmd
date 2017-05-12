@@ -1,0 +1,143 @@
+---
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+# Wir wollen knitr für schönere Tabellen benutzen.
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Erste Hausarbeit in Statistik für Wirtschaftsinformatiker
+## HTW Berlin, Sommersemester 2017
+
+**Name, Matrikelnummer:** Jenny Rothe  
+**Name, Matrikelnummer:** Laura Laugwitz, 544049
+
+
+## Formalitäten
+
+Bitte bearbeiten Sie diese Hausarbeit in Zweiergruppen, in denen beide Studierende bei Herrn Spott oder beide bei Herrn Heimann eingeschrieben sind. Gruppen von drei oder mehr Studierenden sind nicht zugelassen. Setzen Sie bitte Ihre beiden Namen und Matrikelnummern oben ein.
+
+
+Öffnen Sie das Dokument `titanic.Rmd` in RStudio, lösen Sie alle Aufgaben mit R und **fügen Sie alle Antworten zu diesem R-Markdown-Dokument hinzu, einschließlich des R-Codes**, wie Sie es bereits bei den Übungsblättern getan haben. Zusätzliche handgeschriebene Lösungen oder Erklärungen sind nicht zugelassen ebensowenig wie Lösungen, die mit anderer Software wie z.B. Microsoft Excel erstellt wurden.
+
+Mehr Informationen über R-Markdown-Dokumente finden Sie im Internet unter http://rmarkdown.rstudio.com/lesson-1.html. Sie können die Musterlösungen in RMarkdown zu unseren Übungsblättern als Beispiele heranziehen.
+
+Wenn Sie mit der Bearbeitung fertig sind, erzeugen Sie bitte in RStudio mit dem Knopf **Knit PDF** ein PDF-Dokument oder wählen alternativ über das Dreieck neben **Knit PDF** die Option **Knit HTML**, um ein HTML-Dokument zu erzeugen. Für **Knit PDF** ist die Installation einer LaTeX-Distribution wie MikTeX für Windows (miktex.org) oder MacTeX für Mac OS X (www.tug.org/mactex/) erforderlich. **Knit HTML** funktioniert auch ohne LaTeX. **Drucken Sie das so erzeugte Dokument aus und geben Sie es in Papierform ab**.
+
+## Abgabe
+
+* **Elektronisch in Moodle bis spätestens Montag, 22.05.2017 um 16:00**
+    * sowohl das RMarkdown-Quelldokument
+    * als auch das daraus erzeugte PDF- oder HTML-Dokument  
+* **UND in Papierform spätestens am 22.05. bzw. 23.05.** bei Herr Heimann bzw. Herrn Spott in den Übungen oder der Vorlesung. Spätere Abgaben werden nicht berücksichtigt und führen automatisch zu einer Bewertung mit 0 Punkten. 
+
+Die Ergebnisse aller Hausarbeiten werden zusammen mit 30% gewichtet, das Ergebnis der Klausur mit 70%. 
+
+**Wichtig:** Sobald Sie eine Hausarbeit abgeben, hat damit Ihre Prüfungsleistung für das Sommersemester 2017 begonnen, die mit der Klausur abgeschlossen wird. Wenn Sie eine Hausarbeit abgeben, aber die Klausur nicht im Sommersemester 2017 mitschreiben, sind Sie automatisch durchgefallen und die Punkte der Hausarbeiten verfallen. Diese Regelung ist in der Prüfungsordnung festgelegt.
+
+Viel Erfolg, 
+
+Ihre Dozenten Martin Spott und Michael Heimann
+
+Stand `r format(Sys.Date(), format='%d.%m.%Y')`
+
+\newpage
+
+## Aufgaben
+
+Die Aufgaben befassen sich mit Passagierdaten des Kreuzfahrtschiffes Titanic, das 1912 auf ihrer Jungfernfahrt gesunken ist. Der Datensatz `titanic_data.csv` enthält Informationen über knapp 900 der geschätzen 2224 Personen, die zum Zeitpunkt des Untergangs an Bord waren. 
+
+Die Merkmale sind 
+
+* `PassengerId`: Passenger ID
+* `Survived`: 0=no, 1=yes
+* `Pclass`: Passenger Class
+* `Name`
+* `Sex`
+* `Age`
+* `SibSp`: Number of Siblings/Spouses Aboard
+* `Parch`: Number of Parents/Children Aboard
+* `Ticket`: Ticket Number
+* `Fare`
+* `Cabin`
+* `Embarked`: Port of Embarkation
+
+
+## Aufgabe 1
+
+a) Lesen Sie den Datensatz `titanic_data.csv` in R ein und weisen Sie ihn der Variablen `titanic_data` zu! 
+
+```{r}
+titanic_data <- read.csv("titanic_data.csv")
+View(titanic_data)
+str(titanic_data)
+```
+
+
+b) Bestimmen Sie für jedes Merkmal, ob es qualitativ/quantitativ ist und auf welcher Skala es definiert ist (Nominal-, Ordinal- oder Kardinalskala)! 
+
+```{r}
+library(knitr)
+Merkmale <- c("PassengerId", "Survived", "Passenger Class", "Name", 
+              "Sex", "Age", "# of Sibling", "# of Parents/Children", 
+              "Ticket #", "Fare", "Cabin", "Port of Embarkation")
+QualiQuanti <- c("quantitativ", "quali?", "quali?", "qualitativ", 
+                 "qualitativ", "quantitativ", "quantitativ", "quantitativ", 
+                 "qualitativ", "quantitativ", "quali?", "qualitativ")
+Skala <- c("Kardinal", "Nominal", "Ordinal?", "Nominal", 
+           "Nominal", "Kardinal", "Kardinal", "Kardinal", 
+           "Nominal?", "Kardinal", "Ordinal?", "Nominal?")
+
+Titanic_Merkmale <- data.frame(Merkmale, QualiQuanti, Skala)
+kable(Titanic_Merkmale)
+```
+
+c) Bestimmen Sie die Anzahl der Passagiere im Datensatz mit R-Befehlen! 
+
+```{r}
+dim(titanic_data) # Gibt die Dimensionen an
+nrow(titanic_data) # Zählt Reihen
+```
+
+d) Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!
+
+```{r}
+names(titanic_data) # Bezeichungen der Merkmale
+ncol(titanic_data) # Zählt Spalten
+```
+
+
+d) Fügen Sie eine Spalte namens `Survived2` zum Data-Frame `titanic_data` hinzu, welche die Überlebenden mit dem String `"yes"` und alle anderen mit `"no"` kodiert! 
+
+e) Bestimmen Sie die Anzahl fehlender Werte des Merkmals `Age` mit R-Befehlen!
+
+
+## Aufgabe 2
+
+Geben Sie den Diagrammen in den folgenden Aufgaben sinnvolle Titel und beschriften Sie alle Axen!
+
+a) Erzeugen Sie ein Balkendiagramm des Merkmals `Survived2`, welches die absolute Anzahl der Überlebenden und Gestorbenen gegenüberstellt!
+
+b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit den relativen Häufigkeiten in Prozent:
+    (i) für Frauen
+    (ii) für Männer
+    (iii) für jede der drei Klassen des Merkmals `Pclass`
+ 
+c) Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Passagiergruppen lernen!
+
+## Aufgabe 3
+
+Geben Sie den Diagrammen in den folgenden Aufgaben sinnvolle Titel und beschriften Sie alle Axen!
+
+Erstellen Sie die Histogramme in a) und b) mit der Gruppierung [0,5), [5,10), [10, 15) usw! Beachten Sie, zu welcher Gruppe die Grenzwerte gehören. 
+
+a) Erzeugen Sie ein Histogramm absoluter Häufigkeiten des Merkmals `Age`! 
+
+b) Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals `Age` für die Überlebenden und die Gestorbenen! 
+
+c) Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Altersgruppen lernen!
+
