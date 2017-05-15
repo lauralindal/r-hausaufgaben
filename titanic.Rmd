@@ -86,12 +86,12 @@ b) Bestimmen Sie für jedes Merkmal, ob es qualitativ/quantitativ ist und auf we
     Merkmale <- c("PassengerId", "Survived", "Passenger Class", "Name", 
                   "Sex", "Age", "# of Sibling", "# of Parents/Children", 
                   "Ticket #", "Fare", "Cabin", "Port of Embarkation")
-    QualiQuanti <- c("quantitativ", "quali?", "quali?", "qualitativ", 
+    QualiQuanti <- c("qualitativ", "qualitativ", "qualitativ", "qualitativ", 
                      "qualitativ", "quantitativ", "quantitativ", "quantitativ", 
-                     "qualitativ", "quantitativ", "quali?", "qualitativ")
-    Skala <- c("Kardinal", "Nominal", "Ordinal?", "Nominal", 
+                     "qualitativ", "quantitativ", "qualitativ", "qualitativ")
+    Skala <- c("Nominal", "Nominal", "Ordinal", "Nominal", 
                "Nominal", "Kardinal", "Kardinal", "Kardinal", 
-               "Nominal?", "Kardinal", "Ordinal?", "Nominal?")
+               "Nominal", "Kardinal", "Ordinal", "Nominal?")
     
     Titanic_Merkmale <- data.frame(Merkmale, QualiQuanti, Skala)
     kable(Titanic_Merkmale)
