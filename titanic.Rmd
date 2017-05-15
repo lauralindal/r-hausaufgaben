@@ -1,9 +1,9 @@
 ---
 output:
-  word_document: default
-  html_notebook: default
   pdf_document: default
+  html_notebook: default
   html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Erste Hausarbeit in Statistik für Wirtschaftsinformatiker
 ## HTW Berlin, Sommersemester 2017
 
-**Name, Matrikelnummer:** Jenny Rothe  
+**Name, Matrikelnummer:** Jenny Rothe, 544179  
 **Name, Matrikelnummer:** Laura Laugwitz, 544049
 
 
@@ -91,7 +91,7 @@ b) Bestimmen Sie für jedes Merkmal, ob es qualitativ/quantitativ ist und auf we
                      "qualitativ", "quantitativ", "qualitativ", "qualitativ")
     Skala <- c("Nominal", "Nominal", "Ordinal", "Nominal", 
                "Nominal", "Kardinal", "Kardinal", "Kardinal", 
-               "Nominal", "Kardinal", "Ordinal", "Nominal?")
+               "Nominal", "Kardinal", "Ordinal", "Nominal")
     
     Titanic_Merkmale <- data.frame(Merkmale, QualiQuanti, Skala)
     kable(Titanic_Merkmale)
@@ -103,6 +103,8 @@ c) Bestimmen Sie die Anzahl der Passagiere im Datensatz mit R-Befehlen!
     dim(titanic_data) # Gibt die Dimensionen an
     nrow(titanic_data) # Zählt Reihen
     ```
+    
+    Die Anzahl beträgt 891 Passagiere.
 
 d) Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!
 
@@ -110,6 +112,7 @@ d) Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!
     names(titanic_data) # Bezeichungen der Merkmale
     ncol(titanic_data) # Zählt Spalten
     ```
+    Die Anzahl der Merkmale beträgt 12.
 
 
 d) Fügen Sie eine Spalte namens `Survived2` zum Data-Frame `titanic_data` hinzu, welche die Überlebenden mit dem String `"yes"` und alle anderen mit `"no"` kodiert! 
@@ -134,6 +137,7 @@ e) Bestimmen Sie die Anzahl fehlender Werte des Merkmals `Age` mit R-Befehlen!
     ```{r}
     sum(is.na(titanic_data$Age))    
     ```
+    Bei dem Merkmal `Age` fehlen 177 Werte.
 
 
 ## Aufgabe 2
