@@ -219,12 +219,12 @@ b) Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals `Age
     age_deceased <- age_deceased[!is.na(age_deceased)]
     
     hist(age_survivors, freq = FALSE, breaks = bins,
-     xlab = "Alter der Überlebenden", ylab = "relative Häufigkeit", 
-     main = "Histogramm für Alter I")
+     xlab = "Alter", ylab = "relative Häufigkeit", 
+     main = "Histogramm für Überlebende")
     
     hist(age_deceased, freq = FALSE, breaks = bins,
-     xlab = "Alter der Verstorbenen", ylab = "relative Häufigkeit", 
-     main = "Histogramm für Alter II")
+     xlab = "Alter", ylab = "relative Häufigkeit", 
+     main = "Histogramm für Verstorbene")
 
     ```
 
