@@ -1,9 +1,7 @@
 ---
-output:
-  pdf_document: default
-  html_notebook: default
-  html_document: default
-  word_document: default
+title: "titanic_mit_background.Rmd"
+date: "May 18, 2017"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -74,6 +72,8 @@ a) Lesen Sie den Datensatz `titanic_data.csv` in R ein und weisen Sie ihn der Va
 
     ```{r}
     titanic_data <- read.csv("titanic_data.csv")
+    View(titanic_data) # Zusätzlicher Eindruck
+    str(titanic_data) # Zusätzlicher Eindruck
     ```
 
 
@@ -116,20 +116,15 @@ d) Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!
 d) Fügen Sie eine Spalte namens `Survived2` zum Data-Frame `titanic_data` hinzu, welche die Überlebenden mit dem String `"yes"` und alle anderen mit `"no"` kodiert! 
     
     ```{r}
-    # erster Versuch
-    #titanic_data[, "Survived3"] <- 0
-    #for(i in 1:891){
-    #  if(titanic_data[i, 2]==1){
-    #    titanic_data[i, 13] <- "yes"
-    #  }
-    #  else {
-    #    titanic_data[i, 13] <- "no"
-    #  }
-    #}
-    
-    # zweiter Versuch
-    titanic_data$Survived2 <- "no"
-    titanic_data$Survived2[titanic_data$Survived == 1] <- "yes"
+    titanic_data[, "Survived2"] <- 0
+    for(i in 1:891){
+      if(titanic_data[i, 2]==1){
+        titanic_data[i, 13] <- "yes"
+      }
+      else {
+        titanic_data[i, 13] <- "no"
+      }
+    }
     View(titanic_data)
     ```
 
@@ -162,6 +157,10 @@ b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit de
     (iii) für jede der drei Klassen des Merkmals `Pclass`
     
     ```{r}
+    # we need the row-wise proportion, ie, the proportion of each sex that survived, as separate groups. 
+    # So we need to tell the command to give us proportions in the 1st dimension which stands for the rows
+    # http://trevorstephens.com/kaggle-titanic-tutorial/r-part-2-the-gender-class-model/
+    
     f_gender <- prop.table(table(titanic_data$Sex, titanic_data$Survived), 1)*100
     f_women <- f_gender[1,]
     f_men <- f_gender[2,]
@@ -180,6 +179,13 @@ b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit de
             xlab="Überlebt?", ylab ="Prozent")
     barplot(f_3, names.arg = c("Nein", "Ja"), main="Überlebenschancen Dritte Klasse", 
             xlab="Überlebt?", ylab ="Prozent")
+    
+    # weitere Überlegungen bezüglich der Verhältnisse
+    h_gender <- table(titanic_data$Sex)
+    h_gender
+    f_gender_relative_to_all <- prop.table(table(titanic_data$Sex, titanic_data$Survived))*100
+    f_gender_relative_to_all
+    
     ```
     
  
@@ -204,29 +210,8 @@ a) Erzeugen Sie ein Histogramm absoluter Häufigkeiten des Merkmals `Age`!
 
 b) Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals `Age` für die Überlebenden und die Gestorbenen! 
 
-    ```{r}
-    age_survivors <- 0
-    age_deceased <- 0
-    for(i in 1:891){
-      if(titanic_data[i, 2] == 1){
-        age_survivors[i] <- titanic_data[i, 6]
-      }
-      else {
-        age_deceased[i] <- titanic_data[i, 6]
-      }
-    }
-    age_survivors <- age_survivors[!is.na(age_survivors)]
-    age_deceased <- age_deceased[!is.na(age_deceased)]
-    
-    hist(age_survivors, freq = FALSE, breaks = bins,
-     xlab = "Alter der Überlebenden", ylab = "relative Häufigkeit", 
-     main = "Histogramm für Alter I")
-    
-    hist(age_deceased, freq = FALSE, breaks = bins,
-     xlab = "Alter der Verstorbenen", ylab = "relative Häufigkeit", 
-     main = "Histogramm für Alter II")
-
-    ```
+```{r}
+```
 
 
 c) Beschreiben Sie kurz, was wir in b) über die Altersverteilung bei den Überlebenden und Gestorbenen im Vergleich lernen!
