@@ -185,7 +185,7 @@ b) Erzeugen Sie weitere Balkendiagramme des Merkmals `Survived2`, diesmal mit de
  
 c) Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Passagiergruppen lernen!
 
-    Wir sehen, dass insgesamt mehr Passagiere gestorben sind als überlebt haben. Innerhalb der Gruppe der Frauen gab es mehr Überlebende als Verstorbene - Frauen      hatten also eine recht gute Überlebenschance. Innerhalb der Gruppe der Männer gab es mehr Verstorbene als Überlebende - Männer hatten also eher schlechte          Überlebenschancen. Für die Passagiere der ersten Klasse waren die Überlebenschancen recht gut, für die zweite Klasse fast 50/50, für die dritte Klasse             schlecht. (Genauere Angaben?)
+    Wir sehen, dass insgesamt mehr Passagiere gestorben sind als überlebt haben. Innerhalb der Gruppe der Frauen gab es mehr Überlebende als Verstorbene - Frauen      hatten also eine recht gute Überlebenschance. Innerhalb der Gruppe der Männer gab es mehr Verstorbene als Überlebende - Männer hatten also eher schlechte          Überlebenschancen. Für die Passagiere der ersten Klasse waren die Überlebenschancen recht gut, für die zweite Klasse fast 50/50, für die dritte Klasse             schlecht.
 
 
 ## Aufgabe 3
@@ -230,4 +230,7 @@ b) Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals `Age
 
 
 c) Beschreiben Sie kurz, was wir in b) über die Altersverteilung bei den Überlebenden und Gestorbenen im Vergleich lernen!
+
+    Bei den Überlebenden gab es mehr Personen zwschen 0 und 20, und 20 und 40 Jahren. Die meisten Überlebenden und Verstorbenen sind zwischen 20 und 40 Jahren alt.     Es haben mehr kinder überlebt als gestorben sind. Zwischen 40 und 60 Jahren sind fast genauso viel gestorben wie überlebt haben. Junge Menschen zwischen 20 bis     35 haben häufiger überlebt als sie gestorben sind.
+    Die Gruppe der 20 bis 25-jährigen ist bei den Verstorbenen am häufigsten/größten. Bei den Überlebenden ist die Gruppe der 20 bis 35-jährigen am                    größten/häufigsten.
 
