@@ -191,16 +191,21 @@ round(f_age_survival_margins*100, 2)
 
 # Ermittle bedingte relative Häufigkeiten f($age_group | survived)
 h_survivors <- matrix(h_age_survival[,2], nrow = 16, ncol = 1,  dimnames=list(c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]"), c("Survived")))
-round(prop.table(h_survivors) *100, 2)
+f_survivors <- prop.table(h_survivors)
+f_survivors_rounded <- round(f_survivors * 100, 2)
+f_survivors_rounded
 ```
 
 
 c) Stellen Sie das Ergebnis aus b) als Balkendiagramm da -- für jede Altersgruppe einen Balken! Beschriften Sie alle Axen und geben dem Diagramm einen sinnvollen Titel!
 
 ```{r}
-barplot(f_age_survival)
+dims <- c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]")
+
+barplot(f_survivors[ ,1], names.arg = dims, main = "Überlebenschance: f($age_group | survived)", xlab = "Age Group", ylab = "Relative Häufigkeit", cex.names = 0.8)
 ```
 
 
 d) Welche zwei Altersgruppen hatten die größte Überlebenschance? Sind beide Altersgruppen statistisch gesehen gleich bedeutend?
 
+Die relative Häufigkeit für die Altergruppen 15-20 und 20-25 sind genau gleich. Unter den Überlebenden waren 14.48% zwischen (15, 20] Jahren alt und 14.48% waren zwischen (20, 25] Jahre alt. Allerdings können wir die Werte auch noch mal anders betrachten: Die gemeinsame relative Häufigkeit zeigt und, dass der Anteil der überlebenden (15, 20]-Jährigen bei 6,62% liegt, während der Anteil der überlebenden (20, 25]-Jährigen bei 5.88% liegt. Das hängt damit zusammen, dass in der letzteren Altergruppe verhältnismäßig mehr Menschen gestorben sind.
