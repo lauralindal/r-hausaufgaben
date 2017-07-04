@@ -142,7 +142,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("titanic.Rmd");
+  window.initializeSourceEmbed("titanic2.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
@@ -171,10 +171,8 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-text-begin -->
-<div id="erste-hausarbeit-in-statistik-fur-wirtschaftsinformatiker" class="section level1">
-<h1>Erste Hausarbeit in Statistik für Wirtschaftsinformatiker</h1>
+<div id="zweite-hausarbeit-in-statistik-fur-wirtschaftsinformatiker" class="section level1">
+<h1>Zweite Hausarbeit in Statistik für Wirtschaftsinformatiker</h1>
 <div id="htw-berlin-sommersemester-2017" class="section level2">
 <h2>HTW Berlin, Sommersemester 2017</h2>
 <p><strong>Name, Matrikelnummer:</strong> Jenny Rothe, 544179<br />
@@ -190,292 +188,283 @@ $(document).ready(function () {
 <div id="abgabe" class="section level2">
 <h2>Abgabe</h2>
 <ul>
-<li><strong>Elektronisch in Moodle bis spätestens Montag, 22.05.2017 um 16:00</strong>
+<li><strong>Elektronisch in Moodle bis spätestens Montag, 10.07.2017 um 16:00</strong>
 <ul>
 <li>sowohl das RMarkdown-Quelldokument</li>
 <li>als auch das daraus erzeugte PDF- oder HTML-Dokument<br />
 </li>
 </ul></li>
-<li><strong>UND in Papierform spätestens am 22.05. bzw. 23.05.</strong> bei Herr Heimann bzw. Herrn Spott in den Übungen oder der Vorlesung. Spätere Abgaben werden nicht berücksichtigt und führen automatisch zu einer Bewertung mit 0 Punkten.</li>
+<li><strong>UND in Papierform spätestens am 10.07. bzw. 11.07.</strong> bei Herrn Heimann bzw. Herrn Spott in den Übungen oder der Vorlesung. Spätere Abgaben werden nicht berücksichtigt und führen automatisch zu einer Bewertung mit 0 Punkten.</li>
 </ul>
 <p>Die Ergebnisse aller Hausarbeiten werden zusammen mit 30% gewichtet, das Ergebnis der Klausur mit 70%.</p>
 <p><strong>Wichtig:</strong> Sobald Sie eine Hausarbeit abgeben, hat damit Ihre Prüfungsleistung für das Sommersemester 2017 begonnen, die mit der Klausur abgeschlossen wird. Wenn Sie eine Hausarbeit abgeben, aber die Klausur nicht im Sommersemester 2017 mitschreiben, sind Sie automatisch durchgefallen und die Punkte der Hausarbeiten verfallen. Diese Regelung ist in der Prüfungsordnung festgelegt.</p>
 <p>Viel Erfolg,</p>
 <p>Ihre Dozenten Martin Spott und Michael Heimann</p>
-<p>Stand 22.05.2017</p>
+<p>Stand 04.07.2017</p>
 
 </div>
 <div id="aufgaben" class="section level2">
 <h2>Aufgaben</h2>
-<p>Die Aufgaben befassen sich mit Passagierdaten des Kreuzfahrtschiffes Titanic, das 1912 auf ihrer Jungfernfahrt gesunken ist. Der Datensatz <code>titanic_data.csv</code> enthält Informationen über knapp 900 der geschätzen 2224 Personen, die zum Zeitpunkt des Untergangs an Bord waren.</p>
-<p>Die Merkmale sind</p>
-<ul>
-<li><code>PassengerId</code>: Passenger ID</li>
-<li><code>Survived</code>: 0=no, 1=yes</li>
-<li><code>Pclass</code>: Passenger Class</li>
-<li><code>Name</code></li>
-<li><code>Sex</code></li>
-<li><code>Age</code></li>
-<li><code>SibSp</code>: Number of Siblings/Spouses Aboard</li>
-<li><code>Parch</code>: Number of Parents/Children Aboard</li>
-<li><code>Ticket</code>: Ticket Number</li>
-<li><code>Fare</code></li>
-<li><code>Cabin</code></li>
-<li><code>Embarked</code>: Port of Embarkation</li>
-</ul>
+<p>Wie in der ersten Hausarbeit analysieren wir die Passagierdaten <code>titanic_data.csv</code> des Kreuzfahrtschiffes Titanic. Wir lesen die Daten ein und fügen die Spalte <code>Survived2</code> hinzu, die die Werte des Merkmals <code>Survived</code> anstatt 0/1 mit <em>no/yes</em> kodiert.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXR6ZW4gU2llIGhpZXIgZGVuIHJpY2h0aWdlbiBQZmFkIGbDvHIgdGl0YW5pY19kYXRhLmNzdiBlaW5cbnRpdGFuaWNfZGF0YSA8LSByZWFkLmNzdihcInRpdGFuaWNfZGF0YS5jc3ZcIilcbnRpdGFuaWNfZGF0YSRTdXJ2aXZlZDIgPC0gZmFjdG9yKHRpdGFuaWNfZGF0YSRTdXJ2aXZlZCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsZXZlbHMgPSBjKDAsMSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKFwibm9cIiwgXCJ5ZXNcIikpXG5gYGAifQ== -->
+<pre class="r"><code># setzen Sie hier den richtigen Pfad für titanic_data.csv ein
+titanic_data &lt;- read.csv(&quot;titanic_data.csv&quot;)
+titanic_data$Survived2 &lt;- factor(titanic_data$Survived, 
+                                 levels = c(0,1),
+                                 labels = c(&quot;no&quot;, &quot;yes&quot;))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
-<div id="aufgabe-1" class="section level2">
-<h2>Aufgabe 1</h2>
+<div id="aufgabe-1-15-punkte" class="section level2">
+<h2>Aufgabe 1 (15 Punkte)</h2>
+<p>Wir untersuchen, ob sich die Überlebenschancen weiblicher und männlicher Passagiere unterscheiden.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Lesen Sie den Datensatz <code>titanic_data.csv</code> in R ein und weisen Sie ihn der Variablen <code>titanic_data</code> zu!</li>
+<li>Stellen Sie die Kontingenztabelle der absoluten Häufigkeiten von <code>Survived2</code> und <code>Sex</code> auf!</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<pre><code>```r
-typeof(ti)
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwibGlzdFwiXG4ifQ== -->
-<pre><code>```
-[1] &quot;list&quot;
-```</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaF9zdXJ2X2dlbmRlciA8LSB0YWJsZSh0aXRhbmljX2RhdGEkU3Vydml2ZWQyLCB0aXRhbmljX2RhdGEkU2V4KVxuYWRkbWFyZ2lucyhoX3N1cnZfZ2VuZGVyKVxuYGBgIn0= -->
+<pre class="r"><code>h_surv_gender &lt;- table(titanic_data$Survived2, titanic_data$Sex)
+addmargins(h_surv_gender)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBcbiAgICAgIGZlbWFsZSBtYWxlIFN1bVxuICBubyAgICAgIDgxICA0NjggNTQ5XG4gIHllcyAgICAyMzMgIDEwOSAzNDJcbiAgU3VtICAgIDMxNCAgNTc3IDg5MVxuIn0= -->
+<pre><code>     
+      female male Sum
+  no      81  468 549
+  yes    233  109 342
+  Sum    314  577 891</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Bestimmen Sie für jedes Merkmal, ob es qualitativ/quantitativ ist und auf welcher Skala es definiert ist (Nominal-, Ordinal- oder Kardinalskala)!</li>
+<li>Stellen Sie die Kontingenztabelle der relativen Häufigkeiten von <code>Survived2</code> und <code>Sex</code> in Prozent auf!</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<pre><code>
-<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
-    
-    <table>
-    <thead>
-    <tr class="header">
-    <th align="left">Merkmale</th>
-    <th align="left">QualiQuanti</th>
-    <th align="left">Skala</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td align="left">PassengerId</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal</td>
-    </tr>
-    <tr class="even">
-    <td align="left">Survived</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal</td>
-    </tr>
-    <tr class="odd">
-    <td align="left">Passenger Class</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Ordinal</td>
-    </tr>
-    <tr class="even">
-    <td align="left">Name</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal</td>
-    </tr>
-    <tr class="odd">
-    <td align="left">Sex</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal</td>
-    </tr>
-    <tr class="even">
-    <td align="left">Age</td>
-    <td align="left">quantitativ</td>
-    <td align="left">Kardinal</td>
-    </tr>
-    <tr class="odd">
-    <td align="left"># of Sibling</td>
-    <td align="left">quantitativ</td>
-    <td align="left">Kardinal</td>
-    </tr>
-    <tr class="even">
-    <td align="left"># of Parents/Children</td>
-    <td align="left">quantitativ</td>
-    <td align="left">Kardinal</td>
-    </tr>
-    <tr class="odd">
-    <td align="left">Ticket #</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal</td>
-    </tr>
-    <tr class="even">
-    <td align="left">Fare</td>
-    <td align="left">quantitativ</td>
-    <td align="left">Kardinal</td>
-    </tr>
-    <tr class="odd">
-    <td align="left">Cabin</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Ordinal</td>
-    </tr>
-    <tr class="even">
-    <td align="left">Port of Embarkation</td>
-    <td align="left">qualitativ</td>
-    <td align="left">Nominal?</td>
-    </tr>
-    </tbody>
-    </table>
-<!-- rnb-html-end -->
-    </code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZl9zdXJ2X2dlbmRlciA8LSBwcm9wLnRhYmxlKGhfc3Vydl9nZW5kZXIpXG5yb3VuZChhZGRtYXJnaW5zKGZfc3Vydl9nZW5kZXIpKjEwMCwgZGlnaXRzID0gMilcbmBgYCJ9 -->
+<pre class="r"><code>f_surv_gender &lt;- prop.table(h_surv_gender)
+round(addmargins(f_surv_gender)*100, digits = 2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBcbiAgICAgIGZlbWFsZSAgIG1hbGUgICAgU3VtXG4gIG5vICAgIDkuMDkgIDUyLjUzICA2MS42MlxuICB5ZXMgIDI2LjE1ICAxMi4yMyAgMzguMzhcbiAgU3VtICAzNS4yNCAgNjQuNzYgMTAwLjAwXG4ifQ== -->
+<pre><code>     
+      female   male    Sum
+  no    9.09  52.53  61.62
+  yes  26.15  12.23  38.38
+  Sum  35.24  64.76 100.00</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="3" style="list-style-type: lower-alpha">
-<li>Bestimmen Sie die Anzahl der Passagiere im Datensatz mit R-Befehlen!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<pre><code>```r
-nrow(titanic_data) # Zählt Reihen
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDg5MVxuIn0= -->
-<pre><code>```
-[1] 891
-```</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<pre><code>Die Anzahl beträgt 891 Passagiere.</code></pre>
-<ol start="4" style="list-style-type: lower-alpha">
-<li>Bestimmen Sie die Anzahl der Merkmale im Datensatz mit R-Befehlen!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<pre><code>```r
-ncol(titanic_data) # Zählt Spalten
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEyXG4ifQ== -->
-<pre><code>```
-[1] 12
-```</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<pre><code>Die Anzahl der Merkmale beträgt 12.</code></pre>
-<ol start="4" style="list-style-type: lower-alpha">
-<li>Fügen Sie eine Spalte namens <code>Survived2</code> zum Data-Frame <code>titanic_data</code> hinzu, welche die Überlebenden mit dem String <code>&quot;yes&quot;</code> und alle anderen mit <code>&quot;no&quot;</code> kodiert!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<pre><code>```r
-```{r}
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IGF0dGVtcHQgdG8gdXNlIHplcm8tbGVuZ3RoIHZhcmlhYmxlIG5hbWVcbiJ9 -->
-<pre><code>```
-Error: attempt to use zero-length variable name
-```</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ol start="5" style="list-style-type: lower-alpha">
-<li>Bestimmen Sie die Anzahl fehlender Werte des Merkmals <code>Age</code> mit R-Befehlen!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<pre><code>```r
-sum(is.na(titanic_data$Age))    
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE3N1xuIn0= -->
-<pre><code>```
-[1] 177
-```</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<pre><code>Bei dem Merkmal `Age` fehlen 177 Werte.</code></pre>
-</div>
-<div id="aufgabe-2" class="section level2">
-<h2>Aufgabe 2</h2>
-<p>Geben Sie den Diagrammen in den folgenden Aufgaben sinnvolle Titel und beschriften Sie alle Axen!</p>
-<ol style="list-style-type: lower-alpha">
-<li>Erzeugen Sie ein Balkendiagramm des Merkmals <code>Survived2</code>, welches die absolute Anzahl der Überlebenden und Gestorbenen gegenüberstellt!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<pre><code>```r
-h_gender
-
-```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiXG5mZW1hbGUgICBtYWxlIFxuICAgMzE0ICAgIDU3NyBcbiJ9 -->
-<pre><code>```
-
-female   male 
-   314    577 
-```</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Erzeugen Sie weitere Balkendiagramme des Merkmals <code>Survived2</code>, diesmal mit den relativen Häufigkeiten in Prozent:
+<li>Berechnen Sie folgende bedingte relative Häufigkeiten in Prozent:
 <ol style="list-style-type: lower-roman">
-<li>für Frauen</li>
-<li>für Männer</li>
-<li>für jede der drei Klassen des Merkmals <code>Pclass</code></li>
+<li>f(Survived2 = yes | Sex = female)</li>
+<li>f(Survived2 = yes | Sex = male)</li>
+<li>f(Sex = female | Survived2 = yes)</li>
+<li>f(Sex = male | Survived2 = yes)</li>
 </ol></li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ol start="4" style="list-style-type: lower-alpha">
+<li><p>Welche der relativen Häufigkeiten in c) beschreiben die Überlebenschance von Frauen bzw. von Männern?</p></li>
+<li><p>Generieren Sie einen Mosaikplot der Merkmale <code>Survived2</code> und <code>Sex</code>. Spalten Sie dabei erst nach <code>Sex</code> auf, dann nach <code>Survived2</code>. Beschriften Sie die Achsen und vergeben Sie einen sinnvollen Titel!</p></li>
+<li><p>Berechnen Sie den Phi-Koeffizienten von <code>Survived2</code> und <code>Sex</code>! Was misst dieser? Was sagt uns in diesem Fall der Wert von Phi?</p></li>
+<li><p>Sind die Merkmale <code>Survived2</code> und <code>Sex</code> statistisch unabhängig voneinander? Begründen Sie Ihre Antwort!</p></li>
+</ol>
+</div>
+<div id="aufgabe-2-9-punkte" class="section level2">
+<h2>Aufgabe 2 (9 Punkte)</h2>
+<p>Wir untersuchen, ob die Überlebenschancen männlicher und weiblicher Passagiere in allen drei Passagierklassen <code>Pclass</code> in einem ähnlichen Verhältnis stehen.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Generieren Sie Mosaikplots der Merkmale <code>Survived2</code> und <code>Sex</code> wie in Aufgabe 1e), jeweils einen für die Passagiere der Klasse 1, 2 und 3! Beschriften Sie die Achsen und vergeben Sie einen sinnvollen Titel!</p></li>
+<li><p>Berechnen Sie den Phi-Koeffizienten von <code>Survived2</code> und <code>Sex</code> jeweils für Klasse 1, 2 und 3!</p></li>
+<li><p>Was bedeutet es, dass der Phi-Koeffizient für Klasse 1 größer ist als für die anderen beiden Klassen?</p></li>
+</ol>
+</div>
+<div id="aufgabe-3-12-punkte" class="section level2">
+<h2>Aufgabe 3 (12 Punkte)</h2>
+<p>Wir untersuchen die Überlebenschancen in verschiedenen Altergruppen.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Gruppieren Sie <code>Age</code> wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle [0,5), [5,10), [10, 15) usw! Beachten Sie wieder, zu welcher Gruppe die Grenzwerte der Intervalle gehören. Hinweis: Sehen Sie sich die Funktion <code>cut()</code> an, deren Syntax der von <code>hist()</code> ähnelt.</p>
+<p>Fügen Sie die Altersgruppe als Spalte <code>AgeGroup</code> dem Data-Frame <code>titanic_data</code> zu.</p></li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
 <pre><code>```r
-f_gender_relative_to_all
+# Gruppierung von Age
+bins &lt;- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80)
+age_group &lt;- table(cut(titanic_data$Age, breaks = bins))
 
+# Anlegen und Befüllen der Spalte 'AgeGroup'
+library(TeachingDemos)
+titanic_data[, &quot;AgeGroup&quot;] &lt;- 0
+for(i in 1:891){
+  if(is.na(titanic_data[i, 6])){
+    titanic_data[i, 14] &lt;- NA
+  }
+  else if(0.0 %&lt;% titanic_data[i, 6] %&lt;=%5.0){
+    titanic_data[i, 14] &lt;- &quot;(0,5]&quot;
+  }
+  else if (5.0 %&lt;% titanic_data[i, 6] %&lt;=%10.0){
+    titanic_data[i, 14] &lt;- &quot;(5,10]&quot;
+  }
+  else if (10.0 %&lt;% titanic_data[i, 6] %&lt;=%15.0){
+    titanic_data[i, 14] &lt;- &quot;(10,15]&quot;
+  }
+  else if (15.0 %&lt;% titanic_data[i, 6] %&lt;=%20.0){
+    titanic_data[i, 14] &lt;- &quot;(15,20]&quot;
+  }
+  else if (20.0 %&lt;% titanic_data[i, 6] %&lt;=%25.0){
+    titanic_data[i, 14] &lt;- &quot;(20,25]&quot;
+  }
+  else if (25.0 %&lt;% titanic_data[i, 6] %&lt;=%30.0){
+    titanic_data[i, 14] &lt;- &quot;(25,30]&quot;
+  }
+  else if (30.0 %&lt;% titanic_data[i, 6] %&lt;=%35.0){
+    titanic_data[i, 14] &lt;- &quot;(30,35]&quot;
+  }
+  else if (35.0 %&lt;% titanic_data[i, 6] %&lt;=%40.0){
+    titanic_data[i, 14] &lt;- &quot;(35,40]&quot;
+  }
+  else if (40.0 %&lt;% titanic_data[i, 6] %&lt;=%45.0){
+    titanic_data[i, 14] &lt;- &quot;(40,45]&quot;
+  }
+  else if (45.0 %&lt;% titanic_data[i, 6] %&lt;=%50.0){
+    titanic_data[i, 14] &lt;- &quot;(45,50]&quot;
+  }
+  else if (50.0 %&lt;% titanic_data[i, 6] %&lt;=%55.0){
+    titanic_data[i, 14] &lt;- &quot;(50,55]&quot;
+  }
+  else if (55.0 %&lt;% titanic_data[i, 6] %&lt;=%60.0){
+    titanic_data[i, 14] &lt;- &quot;(55,60]&quot;
+  }
+  else if (60.0 %&lt;% titanic_data[i, 6] %&lt;=%65.0){
+    titanic_data[i, 14] &lt;- &quot;(60,65]&quot;
+  }
+  else if (65.0 %&lt;% titanic_data[i, 6] %&lt;=%70.0){
+    titanic_data[i, 14] &lt;- &quot;(65,70]&quot;
+  }
+  else if (70.0 %&lt;% titanic_data[i, 6] %&lt;=%75.0){
+    titanic_data[i, 14] &lt;- &quot;(70,75]&quot;
+  }
+  else if (75.0 %&lt;% titanic_data[i, 6] %&lt;=%80.0){
+    titanic_data[i, 14] &lt;- &quot;(75,80]&quot;
+  }
+}
 ```</code></pre>
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICBcbiAgICAgICAgICAgICAgICAgMCAgICAgICAgIDFcbiAgZmVtYWxlICA5LjA5MDkwOSAyNi4xNTAzOTNcbiAgbWFsZSAgIDUyLjUyNTI1MyAxMi4yMzM0NDZcbiJ9 -->
-<pre><code>```
-        
-                 0         1
-  female  9.090909 26.150393
-  male   52.525253 12.233446
-```</code></pre>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Berechnen Sie für jede Altersgruppe [0,5), [5,10) usw. die Überlebenschance (relative Häufigkeit zu überleben) in Prozent!</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFcnN0ZWxsZSBLb250aW5nZW56dGFiZWxsZSAvIGFic29sdXRlIEjDpHVmaWdrZWl0ZW5cbmhfYWdlX3N1cnZpdmFsIDwtIHRhYmxlKHRpdGFuaWNfZGF0YSRBZ2VHcm91cCwgdGl0YW5pY19kYXRhJFN1cnZpdmVkMilcbmFkZG1hcmdpbnMoaF9hZ2Vfc3Vydml2YWwpXG5gYGAifQ== -->
+<pre class="r"><code># Erstelle Kontingenztabelle / absolute Häufigkeiten
+h_age_survival &lt;- table(titanic_data$AgeGroup, titanic_data$Survived2)
+addmargins(h_age_survival)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgXG4gICAgICAgICAgIG5vIHllcyBTdW1cbiAgKDAsNV0gICAgMTMgIDMxICA0NFxuICAoMTAsMTVdICAgOCAgMTEgIDE5XG4gICgxNSwyMF0gIDYzICAzMyAgOTZcbiAgKDIwLDI1XSAgODAgIDQyIDEyMlxuICAoMjUsMzBdICA2NiAgNDIgMTA4XG4gICgzMCwzNV0gIDQ3ICA0MSAgODhcbiAgKDM1LDQwXSAgMzkgIDI4ICA2N1xuICAoNDAsNDVdICAzMCAgMTcgIDQ3XG4gICg0NSw1MF0gIDIzICAxNiAgMzlcbiAgKDUwLDU1XSAgMTQgIDEwICAyNFxuICAoNSwxMF0gICAxMyAgIDcgIDIwXG4gICg1NSw2MF0gIDExICAgNyAgMThcbiAgKDYwLDY1XSAgMTAgICA0ICAxNFxuICAoNjUsNzBdICAgMyAgIDAgICAzXG4gICg3MCw3NV0gICA0ICAgMCAgIDRcbiAgKDc1LDgwXSAgIDAgICAxICAgMVxuICBTdW0gICAgIDQyNCAyOTAgNzE0XG4ifQ== -->
+<pre><code>         
+           no yes Sum
+  (0,5]    13  31  44
+  (10,15]   8  11  19
+  (15,20]  63  33  96
+  (20,25]  80  42 122
+  (25,30]  66  42 108
+  (30,35]  47  41  88
+  (35,40]  39  28  67
+  (40,45]  30  17  47
+  (45,50]  23  16  39
+  (50,55]  14  10  24
+  (5,10]   13   7  20
+  (55,60]  11   7  18
+  (60,65]  10   4  14
+  (65,70]   3   0   3
+  (70,75]   4   0   4
+  (75,80]   0   1   1
+  Sum     424 290 714</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFcm1pdHRsZSBnZW1laW5zYW1lIHJlbGF0aXZlIEjDpHVmaWdrZWl0ZW5cbmZfYWdlX3N1cnZpdmFsIDwtIHByb3AudGFibGUoaF9hZ2Vfc3Vydml2YWwpXG5mX2FnZV9zdXJ2aXZhbF9tYXJnaW5zIDwtIGFkZG1hcmdpbnMoZl9hZ2Vfc3Vydml2YWwpXG5yb3VuZChmX2FnZV9zdXJ2aXZhbF9tYXJnaW5zKjEwMCwgMilcbmBgYCJ9 -->
+<pre class="r"><code># Ermittle gemeinsame relative Häufigkeiten
+f_age_survival &lt;- prop.table(h_age_survival)
+f_age_survival_margins &lt;- addmargins(f_age_survival)
+round(f_age_survival_margins*100, 2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgXG4gICAgICAgICAgICAgIG5vICAgIHllcyAgICBTdW1cbiAgKDAsNV0gICAgIDEuODIgICA0LjM0ICAgNi4xNlxuICAoMTAsMTVdICAgMS4xMiAgIDEuNTQgICAyLjY2XG4gICgxNSwyMF0gICA4LjgyICAgNC42MiAgMTMuNDVcbiAgKDIwLDI1XSAgMTEuMjAgICA1Ljg4ICAxNy4wOVxuICAoMjUsMzBdICAgOS4yNCAgIDUuODggIDE1LjEzXG4gICgzMCwzNV0gICA2LjU4ICAgNS43NCAgMTIuMzJcbiAgKDM1LDQwXSAgIDUuNDYgICAzLjkyICAgOS4zOFxuICAoNDAsNDVdICAgNC4yMCAgIDIuMzggICA2LjU4XG4gICg0NSw1MF0gICAzLjIyICAgMi4yNCAgIDUuNDZcbiAgKDUwLDU1XSAgIDEuOTYgICAxLjQwICAgMy4zNlxuICAoNSwxMF0gICAgMS44MiAgIDAuOTggICAyLjgwXG4gICg1NSw2MF0gICAxLjU0ICAgMC45OCAgIDIuNTJcbiAgKDYwLDY1XSAgIDEuNDAgICAwLjU2ICAgMS45NlxuICAoNjUsNzBdICAgMC40MiAgIDAuMDAgICAwLjQyXG4gICg3MCw3NV0gICAwLjU2ICAgMC4wMCAgIDAuNTZcbiAgKDc1LDgwXSAgIDAuMDAgICAwLjE0ICAgMC4xNFxuICBTdW0gICAgICA1OS4zOCAgNDAuNjIgMTAwLjAwXG4ifQ== -->
+<pre><code>         
+              no    yes    Sum
+  (0,5]     1.82   4.34   6.16
+  (10,15]   1.12   1.54   2.66
+  (15,20]   8.82   4.62  13.45
+  (20,25]  11.20   5.88  17.09
+  (25,30]   9.24   5.88  15.13
+  (30,35]   6.58   5.74  12.32
+  (35,40]   5.46   3.92   9.38
+  (40,45]   4.20   2.38   6.58
+  (45,50]   3.22   2.24   5.46
+  (50,55]   1.96   1.40   3.36
+  (5,10]    1.82   0.98   2.80
+  (55,60]   1.54   0.98   2.52
+  (60,65]   1.40   0.56   1.96
+  (65,70]   0.42   0.00   0.42
+  (70,75]   0.56   0.00   0.56
+  (75,80]   0.00   0.14   0.14
+  Sum      59.38  40.62 100.00</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFcm1pdHRsZSBiZWRpbmd0ZSByZWxhdGl2ZSBIw6R1Zmlna2VpdGVuIGYoJGFnZV9ncm91cCB8IHN1cnZpdmVkKVxuaF9zdXJ2aXZvcnMgPC0gbWF0cml4KGhfYWdlX3N1cnZpdmFsWywyXSwgbnJvdyA9IDE2LCBuY29sID0gMSwgIGRpbW5hbWVzPWxpc3QoYyhcIigwLDVdXCIsIFwiKDUsMTBdXCIsIFwiKDEwLDE1XVwiLCBcIigxNSwyMF1cIiwgXCIoMjAsMjVdXCIsIFwiKDI1LDMwXVwiLCBcIigzMCwzNV1cIiwgXCIoMzUsNDBdXCIsIFwiKDQwLDQ1XVwiLCBcIig0NSw1MF1cIiwgXCIoNTAsNTVdXCIsIFwiKDU1LDYwXVwiLCBcIig2MCw2NV1cIiwgXCIoNjUsNzBdXCIsIFwiKDcwLDc1XVwiLCBcIig3NSw4MF1cIiksIGMoXCJTdXJ2aXZlZFwiKSkpXG5yb3VuZChwcm9wLnRhYmxlKGhfc3Vydml2b3JzKSAqMTAwLCAyKVxuYGBgIn0= -->
+<pre class="r"><code># Ermittle bedingte relative Häufigkeiten f($age_group | survived)
+h_survivors &lt;- matrix(h_age_survival[,2], nrow = 16, ncol = 1,  dimnames=list(c(&quot;(0,5]&quot;, &quot;(5,10]&quot;, &quot;(10,15]&quot;, &quot;(15,20]&quot;, &quot;(20,25]&quot;, &quot;(25,30]&quot;, &quot;(30,35]&quot;, &quot;(35,40]&quot;, &quot;(40,45]&quot;, &quot;(45,50]&quot;, &quot;(50,55]&quot;, &quot;(55,60]&quot;, &quot;(60,65]&quot;, &quot;(65,70]&quot;, &quot;(70,75]&quot;, &quot;(75,80]&quot;), c(&quot;Survived&quot;)))
+round(prop.table(h_survivors) *100, 2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICBTdXJ2aXZlZFxuKDAsNV0gICAgICAxMC42OVxuKDUsMTBdICAgICAgMy43OVxuKDEwLDE1XSAgICAxMS4zOFxuKDE1LDIwXSAgICAxNC40OFxuKDIwLDI1XSAgICAxNC40OFxuKDI1LDMwXSAgICAxNC4xNFxuKDMwLDM1XSAgICAgOS42NlxuKDM1LDQwXSAgICAgNS44NlxuKDQwLDQ1XSAgICAgNS41MlxuKDQ1LDUwXSAgICAgMy40NVxuKDUwLDU1XSAgICAgMi40MVxuKDU1LDYwXSAgICAgMi40MVxuKDYwLDY1XSAgICAgMS4zOFxuKDY1LDcwXSAgICAgMC4wMFxuKDcwLDc1XSAgICAgMC4wMFxuKDc1LDgwXSAgICAgMC4zNFxuIn0= -->
+<pre><code>        Survived
+(0,5]      10.69
+(5,10]      3.79
+(10,15]    11.38
+(15,20]    14.48
+(20,25]    14.48
+(25,30]    14.14
+(30,35]     9.66
+(35,40]     5.86
+(40,45]     5.52
+(45,50]     3.45
+(50,55]     2.41
+(55,60]     2.41
+(60,65]     1.38
+(65,70]     0.00
+(70,75]     0.00
+(75,80]     0.34</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="3" style="list-style-type: lower-alpha">
-<li><p>Beschreiben Sie kurz, was wir in b) über die Überlebenschancen verschiedener Passagiergruppen lernen!</p>
-<p>Wir sehen, dass insgesamt mehr Passagiere gestorben sind als überlebt haben. Innerhalb der Gruppe der Frauen gab es mehr Überlebende als Verstorbene - Frauen hatten also eine recht gute Überlebenschance. Innerhalb der Gruppe der Männer gab es mehr Verstorbene als Überlebende - Männer hatten also eher schlechte Überlebenschancen. Für die Passagiere der ersten Klasse waren die Überlebenschancen recht gut, für die zweite Klasse fast 50/50, für die dritte Klasse schlecht.</p></li>
-</ol>
-</div>
-<div id="aufgabe-3" class="section level2">
-<h2>Aufgabe 3</h2>
-<p>Geben Sie den Diagrammen in den folgenden Aufgaben sinnvolle Titel und beschriften Sie alle Axen!</p>
-<p>Erstellen Sie die Histogramme in a) und b) mit der Gruppierung [0,5), [5,10), [10, 15) usw! Beachten Sie, zu welcher Gruppe die Grenzwerte gehören.</p>
-<ol style="list-style-type: lower-alpha">
-<li>Erzeugen Sie ein Histogramm absoluter Häufigkeiten des Merkmals <code>Age</code>!</li>
+<li>Stellen Sie das Ergebnis aus b) als Balkendiagramm da – für jede Altersgruppe einen Balken! Beschriften Sie alle Axen und geben dem Diagramm einen sinnvollen Titel!</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
-<pre><code>&lt;img src=&quot;data:image/png;base64,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&quot; /&gt;</code></pre>
-<!-- rnb-plot-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(ggplot)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbGlicmFyeShnZ3Bsb3QpIDogdGhlcmUgaXMgbm8gcGFja2FnZSBjYWxsZWQg4oCYZ2dwbG904oCZXG4ifQ== -->
+<pre><code>Error in library(ggplot) : there is no package called ‘ggplot’</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Erzeugen Sie jeweils ein Histogramm relativer Häufigkeiten des Merkmals <code>Age</code> für die Überlebenden und die Gestorbenen!</li>
-</ol>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
-<pre><code>&lt;img src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArwAAAGwCAMAAAB8TkaXAAAC+lBMVEUAAAABAQECAgIDAwMEBAQFBQUGBgYHBwcICAgJCQkKCgoLCwsMDAwNDQ0ODg4PDw8QEBARERESEhITExMUFBQVFRUWFhYXFxcYGBgZGRkaGhobGxscHBwdHR0eHh4fHx8gICAhISEiIiIjIyMkJCQlJSUmJiYnJycoKCgpKSkqKiorKyssLCwtLS0uLi4vLy8wMDAxMTEyMjIzMzM0NDQ1NTU2NjY3Nzc4ODg5OTk6Ojo7Ozs8PDw9PT0+Pj4/Pz9AQEBBQUFCQkJDQ0NERERFRUVGRkZHR0dISEhJSUlKSkpLS0tMTExNTU1OTk5PT09QUFBRUVFSUlJTU1NUVFRVVVVWVlZXV1dYWFhZWVlaWlpbW1tcXFxdXV1eXl5fX19gYGBhYWFiYmJjY2NkZGRlZWVmZmZnZ2doaGhpaWlqampra2tsbGxtbW1ubm5vb29wcHBxcXFycnJzc3N0dHR1dXV2dnZ3d3d4eHh6enp7e3t8fHx9fX1+fn5/f3+AgICBgYGCgoKDg4OEhISFhYWGhoaHh4eIiIiJiYmKioqLi4uMjIyNjY2Ojo6Pj4+QkJCRkZGSkpKTk5OUlJSVlZWWlpaXl5eYmJiZmZmampqbm5ucnJydnZ2enp6fn5+goKChoaGioqKjo6OkpKSlpaWmpqanp6eoqKipqamqqqqrq6usrKytra2urq6vr6+wsLCxsbGysrKzs7O0tLS1tbW2tra3t7e4uLi5ubm6urq7u7u8vLy9vb2+vr6/v7/AwMDBwcHCwsLDw8PExMTFxcXGxsbHx8fIyMjJycnLy8vMzMzNzc3Ozs7Pz8/Q0NDR0dHS0tLT09PU1NTV1dXW1tbX19fY2NjZ2dna2trb29vc3Nzd3d3e3t7f39/g4ODh4eHi4uLj4+Pk5OTl5eXm5ubn5+fo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29vb39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7////m4A0SAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAcgklEQVR4nO3deXxTVd7H8V8LtHSBsijtUGyVdZBFsQxUEGegKA6yKSAiw/gog2wDiqjFDREXBJWOyyCyg+yCDos4FGXUpyguDCrFBwQVeMRHlrJ3gDbn9Xru0t5z2yY5TW5ybk/zff+RhHtPTs4wH8ttcpMQA1AUub0AgGAhXlAW4gVlIV5QFuIFZSFeUBbiBWUhXlAW4gVlIV5QFuIFZSFeUBbitelPtFO/3kw0grFeFCvlUZddVaMxY0eILmXTOG8D+hC1N2+Jl5RBdMS8iACI18Z/vLOJNofhQY/GEjX0F+/JGCLaZ9w0luR3HYg3UpWNd+mUaWX2hineT4j+6xBjZ2fNKv5k1odeBizR2qXpxk3EWwbitSkbb3lhijeX6FW/A/pSzdrUybiJeMtAvDbeDhs29khOaJt9lLEs/QdgZ8b+83SXuul9PjDucPSeJg2f/Jporl5N6tm76xzyrOzaKK7FOO1HKWtFbfJ7JnV82bOmS0LrNz1eNuiMaelSKmVof9hgn6pkUadi6CbtqPegfltfUuk6vh/aPOGaWRdY2fGIN1J5iXee0Ra1OsWGX0aUMpCdaGdueVob90sL/dbA0uIGEx16ydzb8ozeaoMG+u3bovTLNV426Ib/RjvkbVY+Xn2qkkW9RfTam0Q5+m19SSXr+Liu8UC9LpYdj3gjVX+ylMbbhOov2TiKaEbpP9cTiG5c/lISRX/L2Hii7q/3o5LialKj9gcT6MqcVTcTrddbpWtm3KLt7TBD29DPywaDedhQNl59qiN8UQd/1h5Uv80PG4ra05WbPr3biNo+HvFGqorxnifKOMI8E8ctKonmfA1qfsH42TySnY2l1heZ59aS4uiJYnZ4yJCNRoMv6a3W/IWdT6SYX9m5RGrnZYPBW7z6VCVOx9J1jHWmqF+YPV7tXqsYu9SQbig7HvFGKi3eEY9p7uI/edsQRXd55kv9ANWIZhfRU9ptTyPqxv5NpD8fsbH0x6V+/MnOv/9sn0SimXqrTbU/N6OWxmUbLxsMXn/yXrDWtIxoKmPPEr3B7PG+StSkWbNmtenysuMRb6QqPebN5fF+16eG/oO4fX5JNGapjF1HV7B3iRZqN3eXFNdY3z4/gahmu5J4W7HSSkviLbeBlTxYhXgb8zXdRnTXY4/9iehmZo/3IevfiNNlxiPeSOUlXsaOL749nqhLuZ+8yXQ9yyN6Qbu9tfS3LO327mjK/KDw02Di1Q4O2DrbVKYztUsjrXnCHu8MovzSMfbxiDdSVYz3qylT9jN2oiXVNaLZpB/ztrxY8nzEL9oBcRHzDLUVp415m7FXAo+3KV2mTTuxQrwr+GH4Ih7vJv2n/jLGil+e8griBV3FeHcQdV34waxE6srYXKIHDxnPMKzOSaLoXYz1JuozdwjZiptPlLk6p27g8d5M1Pf1v0RXiPd2ok/16+3G0xNGvMY6zqfRZSvz7iN6EvGCrmK8xQPNn3o1/sX0owTqzE60Nbc8o437d5J+62pbcYcT9C0pRFMCjPddY9L25ePVjhpSjCcSihpR7GkzXnMd62ONe9xciHhB5+WY9z9zrk+JSRvwmb75qeT4IdqWpzLrpPXZZtzhu/6Xp0/8yl7c579PbJ19Kp5SCgOL17OkXfy109eXj3cV0Sjz1giilSWH4eY6vh6Qlpjx95JX2Kz/CYgXKuXiDz/oT75uNl6SAPkQb/AKYyhxHzt2PUX/7PZSIhPidWCadtDZPM58wgzkQ7wOeDZlNYm5sneux+2FRCjEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oKwIivfL1SKfub1ECEgExXt9j8H+9bra7SVCQCIo3sxPBQPyW0tZB4QK4uUQr2IQL4d4FYN4OcSrGMTLIV7FIF4O8SoG8XKIVzGIl0O8ikG8HOJVDOLlEK9iEC+HeBWDeDnEqxjEyyFexSBeDvEqBvFyiFcxiJdDvIpBvBziVQzi5RCvYhAvh3gVg3g5xKsYxMshXsUgXg7xKgbxcohXMYiXQ7yKQbwc4lUM4uUQr2IQL4d4FYN4OcSrGMTLIV7FIF4O8SoG8XKIVzGIl0O8ikG8HOJVDOLlEK9iEC+HeBWDeDnEqxjEyyFexSBeDvEqBvFyiFcxwcR78XTIlyED4q1uAot3/dBBbxc/FEPpCz1hWk8YId7qJqB4l1LLrrHjYh+ZO5zWhGtB4YN4q5uA4m1/RzGbS89pt+7uFKb1hBHirW4CijduOWN76UPt1pLE8CwnnBBvdRNQvGlPMVb4/GHt1ozLwrSeMEK81U1A8f417tV8/brow0Z/Cs9ywgnxVjcBxXvqTrpVv86ga4+EZznhJIz3s8SeIrlSVgqVE+DzvCf26Zfrvi4Ox1rCTBjvxlq5Ane8IGWlUDkBv0jhOXVcwed4deJ4Y0VTPIJ4q5LA4v0xu1kcUUzzyQfCtJxwQrzVTUDxfhGXMjJnyeKcMWn1d4ZrQeGDeKubgOLt1q3krIbCvlnhWEx4Id7qJqB468wrvbU+KfRLCTfEW90EFG/G0JLf1Tz3Z4ZjMeGFeKubgOJdR93n5OXv2T6/d/Ra+/b9o+8r8ceDoV1eKCHe6iawZxve70m6qKzNZTYfnlOq6YchXFuIId7qJtDneQt2527ZddznbmEgYbM3WyR1q2AKxKuYIN8GdKbA+3b34n2j83SB2LmCKRCvYoKMN8vH/VyMd5RoRCLirWaCjPfFEd63I16QJ8TvHka8IE+IT8xBvCBPiE/MQbwgT4hPzEG8IE+IT8xBvCBPiE/MQbwgT4hPzEG8IE9ITszhEC/IE5ITczjEC/JUmxNzEG/kseItKDKuLp50NB3iBXmseMn4RAa2tY6j6RAvyGPGu6J/f8rqr2vR1NF0iBfkMeNdO2wY9RumG77R0XSIF+SxDhs6h+TdZ4gX5MEpkRziVYwZ7+x/sNmlHE2HeEEeM96kW1nDUo6mQ7wgDw4bOMSrGFu8nkPfFDr99FLEC/LweBekEu3p94KzfBEvyGPFu5T+vKHWnmfpFUfTIV6Qx4q3zT2Mxe5ho519qQjiBXmseONWGfEujXM0HeIFeax4O0ww4n3oGkfTIV6Qx4p3QVT2tzF582u+5mg6xAvy8GcbZtUjooSpeLbBD8Rbpdie5z2z4+28AoZ4/UC8VYoV717z6uvujqZDvCCPFW/yLu3i2LjoKx1Nh3hBHiveofXyLr1WP37aeUfTIV6Qx4q3aHT81XSn0zPSES/Iw39h80wm5//XIF6Qx4x3m6Fv3GLt0tF0iBfkMeMlG0fTIV6Qx2z1qI2j6RAvyIN3UnCIVzH8lEhT2xtum/Jz8NMhXpDHivf19KQ7JtxZr8X4ob+J2xX0dIgX5LHifbTjKe3yVMYcdqnvTUFPh3hBHiveK5YYVwtaMZYb/NvfES/Iw+N90bh6PoWxdSlBT4d4QR4r3ol13i5iRWsSx1/c2vSeoKdDvCCPFe+FYRSTGkMDzn1DNwX/XC/iBXlsz/Pmz5vyxpeMnf3JwXSIF+TBixQc4lUMPiWSQ7yKwadEcohXMWa8PxWyHy6GYjrEC/KY8cZsKv02IIcQL8hjxts2OYuuzzI5mq6ax/tg9n6B/630gsExM97vHhxFd44yOZqumsfbJb6pQK2CSq8YnLKeKutVqZ8Zlw6cM67PHvG+v5rH27m3aMTlv4pGQMgE9Dxv0dNxFDtR/81upo/7IV7EKw//yVvKz+CXoyaseaDGcIZ4fUK8ElkRjtDce2tSm2l+Brccp10spHcQr0+IV6JyERZkzvMzOOEt/XJg00LE6wvilah8hO/4+3Dpzn/RLw/Vu9eDeH1AvBKVj/CtBD+DX6B7V51nbBWNGIN4vUO8ElkRLjTMSPb3EadFTyTRHu16dSNfn02CeBGvPFaECYa6N/6P3+EX9hcaV1vf9L4f8SJeeQI+n9dz6rifD09HvIhXnvLxHnzS3+gfs5vFEcU0n3zAxwDEi3jlseItXvLwJE2PBn4GfxGXMjJnyeKcMWn1d3ofgXgRrzxmvFOWssepXa3GnZKTVvgZ3K3bafNGYV8fJ58hXsQrT8lHnPZi6WPZm8PYuYwtfgbXsV7BWJ/kfQTiRbzymPF+8wOLXc72NmVsTRc/gzOGlvyu5rk/07790PRS6R+GZ5liiDfymPEm38maTWXFCXvZB/5epFhH3efk5e/ZPr939Fr79v3ZpZrkhnOx/iDeyGPG2/VBNqHBItZ15MG7Wvkb/X5P48PTo7I2+xiAwwbEK4/1bMPJQbezvFpUa7X/8QW7c7fsOu5zN+JFvPKUfZ73xD8r+XE5Z3y82wXxIl55gvzEnCyc2+Ad4pXIjHCDTaXu9uII79sRL+KVB19lxSFexZit7tR8SLP1Kx+v+1pwYo5fiFci/oP2KImfo8WJOaIRiFeigOLFiTmItyoJKF6cmIN4q5KA4sWJOcJ4a9arLzBWNAVUVkDx+joxh4v4eKN3nPBveV/RFFBZZrzXaNpQuvEFrn4G+zoxh0O83wkGrEe8IWPGO9DG32icmCMagXglCvQ1CZyY4x/ilQjfBsQhXsUgXg7xKgbxcohXMYiXQ7yKscXrOfRNoZ9zbioF8SJeeXi8C1KJ9vR7wVm+iBfxymPFu5T+vKHWnmfpFUfTIV7EK48Vb5t7GIvdw0a3djQd4kW88ljxxq0y4l0a52g6xIt45bHi7TDBiPchfx/rL4Z4Ea88VrwLorK/jcmbX/M1R9MhXsQrD3+2YVY9IkqYimcb/EC8VYrted4zO97Oc/rNuYgX8cpjxTvyo+IQTId4Ea88VryN6YrJ3zieDvEiXnn4x/pvn3QVXTPzkLPpEC/ilcd+Yo7nq8d+G+Xve9jEEC/ilafMWWUnlt0RU8PRdIgX8crD4/3hlayatf44/5ij6RAv4pXHivcaium7+ITT6RAv4pXHive2ZadCMB3iRbzy4J0UHOJVjBnv7H+w2aUcTYd4Ea88ZrxJt7KGpRxNh3gRrzzWYUNBkXF18aSj6RAv4pXHipf2GVdb6ziaDvGK4l3TcbXIWdGDgMmMd0X//pTVX9eiqaPpEK8o3idqDxZIfUf0IGAy4107bBj1G6YbvtHRdIhXFO/jyaIpbvfxCZxQnnXY0PlgKKZDvIhXnvLP8x580tF0iBfxysNPiVzy8CRNjwaOpkO8iFceK97HqV2txp2Sk1Y4mg7xIl55rHjTx7I3h7FzGVscTYd4Ea88Vryxy9nepoyt6eJoOsSLeOWx4m02lRUn7GUfJDiaDvEiXnmseCc0WMS6jjx4VytH0yFexCuPFe/JQbezvFpUa7Wj6RAv4pWn7PO8J/75k7PpEC/ilQcno3OIVzFmvLNsHE2HeBGvPGa8yTaOpkO8iFceHDZwiFcx+DYgDvEqBt8GxCFexQT0bUCTbLyPQLyIV56Avg3oofrUoFkJ7yMQL+KVJ7BvA9pbY6b/6RAv4pUnwG8D6oJ4/UO8EgX4bUAfCT48HfEiXnnwbUBcFYm3y23ZAn8TTREhrHj3Ha/ctwF5Th330zfidR5v4xun+/dUkmiKCGHFW++hSoz+MbtZHFFM88kHfAxAvCGI92HBgJOI12TF+2QL8WeifxGXMjJnyeKcMWn1d3ofgXgRrzxWvMuzGo9+fqbGz+Bu3U6bNwr7ZnkfgXgRrzxWvKml/AyuM6/01noff3+IF/HKE9BZZRlDS35X89yfad/+f3NKNf0odEsLDOKNPAHFu466z8nL37N9fu/oMs9FfntfqZTNoV1e5SHeyBPY+bzv9yRdVJavRnHYgHjlCfRk9ILduVt2Hfe5G/EiXnmCfCfFGR+vZiBexCtPkPFm+bgf4kW88gQZ74sjvG9HvIhXHrwBk0O8igk4XpyY4xfilSiweHFijmgE4pUooHhxYg7irUoCihcn5iDeqiSgeHFiDuKtSkJyYg6HeBGvPCE5MYdDvIhXHpyYwyFexeDEHA7xKgavsHGIVzGIl0O8ikG8HOJVDOLlEK9iEC+HeBWDeDnEqxjEyyFexSBeDvEqBvFyqsT7S3R9kRmiB6kWEC+nSrwHo04IPPeA6EGqBcTLqROvaIpZiDcIXuM9Nln0Ud93jBGNeFH0yIjXBvEGw2u8W5sLPup7ev1MwYBnY0SPjHhtEG8wvMfr4z1D3FVjBAMuIF4O8ZZAvBziVQzi5RCvYhAvh3gVg3g5xKsYxMtVn3jHpfUUuOWoaA4FIF6u+sQ7oHmuQNN/i+ZQAOLlqlG8HUQjrkG8FSBeReJtMXO1wOeiKdyHeLlIijfu+sH+9ewomsJ9iJeLpHhrrxYM+CJDNIX7EC+HeG0Qrwnx2iDe0EG8HOK1QbwmxGuDeENHlXhriM5W79VP9CCI1wbxVhSueM+Q6Hz2a68WPQjitUG8FYUvXtEUwxAvh3iDgXgRrzyIl0O8NojXhHhtEG/oIF4O8dogXhPitUG8oYN4OcRrg3hNiNcG8YYO4uUQrw3iNSFeG8QbOoiXQ7w21TJez6njHt97ES/ilSeweH/MbhZHFNN88gEfAxBv5MT7vPDz2dMuiuZwJqB4v4hLGZmzZHHOmLT6O72PQLyRE+9fZ4g+oD3+rGgOZwKKt1u30+aNwr4+ekS8ERTvq6IRCVUp3jrzSm+t9/GFNIi3usT7cYro9P/rnhA9SJWKN2Noye9qnvszvY9AvNUl3qW1RKf/pwwWPUiVincddZ+Tl79n+/ze0Wu9j0C81SbeeNEU7dWKl73fk3RRWZt9DEC8iJerWvEyVrA7d8uu4z53I17Ey1W1ePEihX+I16ZqxYsXKUQjEK9NlYoXL1IgXk6xePEiBeLlFIsXL1IgXk6xeH29SFFgfZx2y0+83G1rW9GncDe6WTBgCYmm6JYqGlF7tGDA5JqiKZp3EI2IyhEMGJgkmqJ+f8GA2VGiKTpdKRoRM1EwYHysaIq0TNGIWktFI/YEHa4uJC9SfGF9nnZ7b8fCPwg+hHvw4I43iUa0EA3o0Vk0ol0fwYD+bURTdPm9aESrgYIBt1wnmuK6XoIBg1qKpviD6HPPB7fpJxjQt61oiszuohGtBolGzPOSS5jiFb9IASBPiF+kAJAnyLcBnSkI7TIAAhdkvFkhfu8bQOCCjPDFEaFdBkDg8BMUlBXiE3MA5AnxiTkA8oT4xBwAeUJ8Yo5Xh/8qejuUFPdNc3sFuilj3V6BYeQzbq9A98SCQPKrIMQn5ni1Jl30RlQpGg93ewW6Qc3dXoHh8nvdXoGu/w2B5FdBiN897JX4rDIpvJ7xJt36vm6vwNB+l9sr0K26w9HdQ/zuYa8Qrw3itZEZb5An5iBeG8RrIzXe4E7MQbw2iNdGcrzBQLw2iNcG8VYW4rVBvJWEeG0Qrw3irSzEa4N4K+lfvSQ8iNgNn7u9At17t7m9AsN1u91egW7tXY7uLiPe4qrxtqGqcTZcUdV4D8oxtxdguHTS0d1xPi8oC/GCshAvKAvxgrIQLygL8YKyEC8oC/GCshAvKAvxgrIQLygL8YKyJMS7rmPd338Z/ofxrWjm9YmtcorcX0pxj2HM9VXkD2iQ9nSxy8u4NLNlfIdVzOEqwh/v+3Tn3Bvifwz74/j2JI14a0zU0+4v5e+kx+vuKvIv6z1vDE13eRlTajy8dBhtcLiK8Mfb8w/F7HRKdtgfx6cLSfdql+Pji9xeyoHERD1ed1dxz43aP0GTBrq8jMajGPN0HOBwFWGPt4DmaJcjm4X7cXzbT/q/T2vogMtLKe4+vOswt/9CzscvY/oBlLvL8Fz2hHbZ5xaHqwh7vLspT7vMiXPvTPDCPee1ywdizrm8lNdTjuvxuruKvbSsW0yTaUUuL+OB5I9Prqy11OEqwh5vLuVrl0voVLgfyL+FNR5weSkHEt5lerzuruJjip+06fEaT7m8jEudiGis07+MsMe7hfQviltMrr4V6PAg+tNFd5dS3F0LV4/X3b+QTfSAdjkh4ZKry/AMSp6zbVrtFxz+ZYQ93l20XbvMiXHzDWSr6zVd5/ZS5tf/vqCg8+CCi+7+heygXO1yPe11dRkf0/va5dOxJ52tIuzxHqMF2uWY5uF+HD/W0L2Fri9lEpnecfcv5CCt1y7X0hFXl7GYjmqX71G+s1WE/6myHr09rDBtctgfx6cLjUZ43F/K99s0bXtuO+ruX4jnOv2jEoameVxdxuekf2/3IzEXnK0i/PG+F/3Ahn719of9cXz6gMbM1J11fyn6Ma/Lq1hDQxcNpxXuLsPTJ3HK0tHRUx2uQsLLw2t+V7fHV+F/GJ/eLPkH+4j7SzHidXkVqzonZqx1exnnHm0R1/6NYoerwIk5oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvJXRg8xvTUiexdjaFT6HzW7oZeMK+pdx/Qrt9XG3CjPuo52BrzECId5K+Dk68Srjgyb1eIf19znOa7xn48ca13/o4OtuFWZEvJWDeCshp+Zs2qHfCCZedlcj/RtMfo1+3tfdEG+QEG8ldO53Ln6ifkOLtzMRFbCFGfFt39I2pC6fUn+fvufMqNTUcX/T462wawN9oF3Op+/L79x5c1KDAT+ZMxY9c3Vi5/UlezbT1oENWjxVZLtD+tKZresOPu51S8RCvGL7aTUbkqp/HqcW78F+WfuKcqLGr7ybFmqp9WwxSe/HkxU3dWGXJC3eCrvYhfqjtMtbO7JyOw9envnmy016mjOOr/noiiH0rrlnBzUaunQUTbTdIb1rv02vxoz1tiVyIV6xZ+ueZ2vpE2YdNpyp94j2h+GpHpba+Jgx5CNaw1hhWkMvuxi777JL7HTMDFZu5+f034xtHOvRZzxc80Xtv4Be1zJjzz7q79G/fOtXfof0VtrP4bs7sYpbIhjiFWt715kzv8aPY1a8O+gbph8OHGapo80hM+voP5gfauhlF2PbKJetpB9YuZ3H6nZY9qu+X5txE/2s3VgUdcHYs4/0T3/eRdv4HdL1w5bsDFZxSwRDvELfmB+snlxkxfs2xcTGxtbSOkot+S1sUkv98uWGXnYxVtT4L2xIZ+1GuZ277qhDv9tgzDg3So9/C/1o7NlHn2p/Ok4r+R3Sn2NGqhW3RDDEK/Ro7W2ffPLJdP3XrpJ48yhvj66Qpc40x7xc+pO34i7Ngw3OJL6kXVfYeWn7gBp7+U/eJXTe2LOP3mb6fzSf8juk67VrqVbcEsEQr4in6e361emYkVa8BfELtC3P9vVYhebRSu2Y94qGXnYx/ctvxtNB7brszpXJB/VfBt8zj3ln6se87VlJvP30Y966p/kdSlOtuCWCIV6Rz2i5cd2n4UUj3uEttl6cWvPhpWNoOuOF3lx7yrzMZg0Zq7hLq7J5VBfjRpmd+2O7Lno1s+ExY8bxNSe/NZD+URpv2pBFI+k52x2sVCtuiVyIV+T+GPOLcRfQZiPeDU0TT3peaRfXKsdjK/TsqCa/GbNJi7fiLs2TlGNcl935XseEBn/cac5YNK11Qift+Lck3vy+9VrP8tjuYKVacUvkQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygLMQLykK8oCzEC8pCvKAsxAvKQrygrP8HphKBSnI5KpwAAAAASUVORK5CYII=&quot; /&gt;</code></pre>
-<!-- rnb-plot-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<ol start="3" style="list-style-type: lower-alpha">
-<li><p>Beschreiben Sie kurz, was wir in b) über die Altersverteilung bei den Überlebenden und Gestorbenen im Vergleich lernen!</p>
-<p>Bei den Überlebenden gab es mehr Personen zwschen 0 und 20, und 20 und 40 Jahren. Die meisten Überlebenden und Verstorbenen sind zwischen 20 und 40 Jahren alt. Es haben mehr kinder überlebt als gestorben sind. Zwischen 40 und 60 Jahren sind fast genauso viel gestorben wie überlebt haben. Junge Menschen zwischen 20 bis 35 haben häufiger überlebt als sie gestorben sind. Die Gruppe der 20 bis 25-jährigen ist bei den Verstorbenen am häufigsten/größten. Bei den Überlebenden ist die Gruppe der 20 bis 35-jährigen am größten/häufigsten.</p></li>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Welche zwei Altersgruppen hatten die größte Überlebenschance? Sind beide Altersgruppen statistisch gesehen gleich bedeutend?</li>
 </ol>
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCm91dHB1dDoKICBodG1sX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KIyBXaXIgd29sbGVuIGtuaXRyIGbDvHIgc2Now7ZuZXJlIFRhYmVsbGVuIGJlbnV0emVuLgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKIyBFcnN0ZSBIYXVzYXJiZWl0IGluIFN0YXRpc3RpayBmw7xyIFdpcnRzY2hhZnRzaW5mb3JtYXRpa2VyCiMjIEhUVyBCZXJsaW4sIFNvbW1lcnNlbWVzdGVyIDIwMTcKCioqTmFtZSwgTWF0cmlrZWxudW1tZXI6KiogSmVubnkgUm90aGUsIDU0NDE3OSAgCioqTmFtZSwgTWF0cmlrZWxudW1tZXI6KiogTGF1cmEgTGF1Z3dpdHosIDU0NDA0OQoKCiMjIEZvcm1hbGl0w6R0ZW4KCkJpdHRlIGJlYXJiZWl0ZW4gU2llIGRpZXNlIEhhdXNhcmJlaXQgaW4gWndlaWVyZ3J1cHBlbiwgaW4gZGVuZW4gYmVpZGUgU3R1ZGllcmVuZGUgYmVpIEhlcnJuIFNwb3R0IG9kZXIgYmVpZGUgYmVpIEhlcnJuIEhlaW1hbm4gZWluZ2VzY2hyaWViZW4gc2luZC4gR3J1cHBlbiB2b24gZHJlaSBvZGVyIG1laHIgU3R1ZGllcmVuZGVuIHNpbmQgbmljaHQgenVnZWxhc3Nlbi4gU2V0emVuIFNpZSBiaXR0ZSBJaHJlIGJlaWRlbiBOYW1lbiB1bmQgTWF0cmlrZWxudW1tZXJuIG9iZW4gZWluLgoKCsOWZmZuZW4gU2llIGRhcyBEb2t1bWVudCBgdGl0YW5pYy5SbWRgIGluIFJTdHVkaW8sIGzDtnNlbiBTaWUgYWxsZSBBdWZnYWJlbiBtaXQgUiB1bmQgKipmw7xnZW4gU2llIGFsbGUgQW50d29ydGVuIHp1IGRpZXNlbSBSLU1hcmtkb3duLURva3VtZW50IGhpbnp1LCBlaW5zY2hsaWXDn2xpY2ggZGVzIFItQ29kZXMqKiwgd2llIFNpZSBlcyBiZXJlaXRzIGJlaSBkZW4gw5xidW5nc2Jsw6R0dGVybiBnZXRhbiBoYWJlbi4gWnVzw6R0emxpY2hlIGhhbmRnZXNjaHJpZWJlbmUgTMO2c3VuZ2VuIG9kZXIgRXJrbMOkcnVuZ2VuIHNpbmQgbmljaHQgenVnZWxhc3NlbiBlYmVuc293ZW5pZyB3aWUgTMO2c3VuZ2VuLCBkaWUgbWl0IGFuZGVyZXIgU29mdHdhcmUgd2llIHouQi4gTWljcm9zb2Z0IEV4Y2VsIGVyc3RlbGx0IHd1cmRlbi4KCk1laHIgSW5mb3JtYXRpb25lbiDDvGJlciBSLU1hcmtkb3duLURva3VtZW50ZSBmaW5kZW4gU2llIGltIEludGVybmV0IHVudGVyIGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20vbGVzc29uLTEuaHRtbC4gU2llIGvDtm5uZW4gZGllIE11c3RlcmzDtnN1bmdlbiBpbiBSTWFya2Rvd24genUgdW5zZXJlbiDDnGJ1bmdzYmzDpHR0ZXJuIGFscyBCZWlzcGllbGUgaGVyYW56aWVoZW4uCgpXZW5uIFNpZSBtaXQgZGVyIEJlYXJiZWl0dW5nIGZlcnRpZyBzaW5kLCBlcnpldWdlbiBTaWUgYml0dGUgaW4gUlN0dWRpbyBtaXQgZGVtIEtub3BmICoqS25pdCBQREYqKiBlaW4gUERGLURva3VtZW50IG9kZXIgd8OkaGxlbiBhbHRlcm5hdGl2IMO8YmVyIGRhcyBEcmVpZWNrIG5lYmVuICoqS25pdCBQREYqKiBkaWUgT3B0aW9uICoqS25pdCBIVE1MKiosIHVtIGVpbiBIVE1MLURva3VtZW50IHp1IGVyemV1Z2VuLiBGw7xyICoqS25pdCBQREYqKiBpc3QgZGllIEluc3RhbGxhdGlvbiBlaW5lciBMYVRlWC1EaXN0cmlidXRpb24gd2llIE1pa1RlWCBmw7xyIFdpbmRvd3MgKG1pa3RleC5vcmcpIG9kZXIgTWFjVGVYIGbDvHIgTWFjIE9TIFggKHd3dy50dWcub3JnL21hY3RleC8pIGVyZm9yZGVybGljaC4gKipLbml0IEhUTUwqKiBmdW5rdGlvbmllcnQgYXVjaCBvaG5lIExhVGVYLiAqKkRydWNrZW4gU2llIGRhcyBzbyBlcnpldWd0ZSBEb2t1bWVudCBhdXMgdW5kIGdlYmVuIFNpZSBlcyBpbiBQYXBpZXJmb3JtIGFiKiouCgojIyBBYmdhYmUKCiogKipFbGVrdHJvbmlzY2ggaW4gTW9vZGxlIGJpcyBzcMOkdGVzdGVucyBNb250YWcsIDIyLjA1LjIwMTcgdW0gMTY6MDAqKgogICAgKiBzb3dvaGwgZGFzIFJNYXJrZG93bi1RdWVsbGRva3VtZW50CiAgICAqIGFscyBhdWNoIGRhcyBkYXJhdXMgZXJ6ZXVndGUgUERGLSBvZGVyIEhUTUwtRG9rdW1lbnQgIAoqICoqVU5EIGluIFBhcGllcmZvcm0gc3DDpHRlc3RlbnMgYW0gMjIuMDUuIGJ6dy4gMjMuMDUuKiogYmVpIEhlcnIgSGVpbWFubiBiencuIEhlcnJuIFNwb3R0IGluIGRlbiDDnGJ1bmdlbiBvZGVyIGRlciBWb3JsZXN1bmcuIFNww6R0ZXJlIEFiZ2FiZW4gd2VyZGVuIG5pY2h0IGJlcsO8Y2tzaWNodGlndCB1bmQgZsO8aHJlbiBhdXRvbWF0aXNjaCB6dSBlaW5lciBCZXdlcnR1bmcgbWl0IDAgUHVua3Rlbi4gCgpEaWUgRXJnZWJuaXNzZSBhbGxlciBIYXVzYXJiZWl0ZW4gd2VyZGVuIHp1c2FtbWVuIG1pdCAzMCUgZ2V3aWNodGV0LCBkYXMgRXJnZWJuaXMgZGVyIEtsYXVzdXIgbWl0IDcwJS4gCgoqKldpY2h0aWc6KiogU29iYWxkIFNpZSBlaW5lIEhhdXNhcmJlaXQgYWJnZWJlbiwgaGF0IGRhbWl0IElocmUgUHLDvGZ1bmdzbGVpc3R1bmcgZsO8ciBkYXMgU29tbWVyc2VtZXN0ZXIgMjAxNyBiZWdvbm5lbiwgZGllIG1pdCBkZXIgS2xhdXN1ciBhYmdlc2NobG9zc2VuIHdpcmQuIFdlbm4gU2llIGVpbmUgSGF1c2FyYmVpdCBhYmdlYmVuLCBhYmVyIGRpZSBLbGF1c3VyIG5pY2h0IGltIFNvbW1lcnNlbWVzdGVyIDIwMTcgbWl0c2NocmVpYmVuLCBzaW5kIFNpZSBhdXRvbWF0aXNjaCBkdXJjaGdlZmFsbGVuIHVuZCBkaWUgUHVua3RlIGRlciBIYXVzYXJiZWl0ZW4gdmVyZmFsbGVuLiBEaWVzZSBSZWdlbHVuZyBpc3QgaW4gZGVyIFByw7xmdW5nc29yZG51bmcgZmVzdGdlbGVndC4KClZpZWwgRXJmb2xnLCAKCklocmUgRG96ZW50ZW4gTWFydGluIFNwb3R0IHVuZCBNaWNoYWVsIEhlaW1hbm4KClN0YW5kIGByIGZvcm1hdChTeXMuRGF0ZSgpLCBmb3JtYXQ9JyVkLiVtLiVZJylgCgpcbmV3cGFnZQoKIyMgQXVmZ2FiZW4KCkRpZSBBdWZnYWJlbiBiZWZhc3NlbiBzaWNoIG1pdCBQYXNzYWdpZXJkYXRlbiBkZXMgS3JldXpmYWhydHNjaGlmZmVzIFRpdGFuaWMsIGRhcyAxOTEyIGF1ZiBpaHJlciBKdW5nZmVybmZhaHJ0IGdlc3Vua2VuIGlzdC4gRGVyIERhdGVuc2F0eiBgdGl0YW5pY19kYXRhLmNzdmAgZW50aMOkbHQgSW5mb3JtYXRpb25lbiDDvGJlciBrbmFwcCA5MDAgZGVyIGdlc2Now6R0emVuIDIyMjQgUGVyc29uZW4sIGRpZSB6dW0gWmVpdHB1bmt0IGRlcyBVbnRlcmdhbmdzIGFuIEJvcmQgd2FyZW4uIAoKRGllIE1lcmttYWxlIHNpbmQgCgoqIGBQYXNzZW5nZXJJZGA6IFBhc3NlbmdlciBJRAoqIGBTdXJ2aXZlZGA6IDA9bm8sIDE9eWVzCiogYFBjbGFzc2A6IFBhc3NlbmdlciBDbGFzcwoqIGBOYW1lYAoqIGBTZXhgCiogYEFnZWAKKiBgU2liU3BgOiBOdW1iZXIgb2YgU2libGluZ3MvU3BvdXNlcyBBYm9hcmQKKiBgUGFyY2hgOiBOdW1iZXIgb2YgUGFyZW50cy9DaGlsZHJlbiBBYm9hcmQKKiBgVGlja2V0YDogVGlja2V0IE51bWJlcgoqIGBGYXJlYAoqIGBDYWJpbmAKKiBgRW1iYXJrZWRgOiBQb3J0IG9mIEVtYmFya2F0aW9uCgoKIyMgQXVmZ2FiZSAxCgphKSBMZXNlbiBTaWUgZGVuIERhdGVuc2F0eiBgdGl0YW5pY19kYXRhLmNzdmAgaW4gUiBlaW4gdW5kIHdlaXNlbiBTaWUgaWhuIGRlciBWYXJpYWJsZW4gYHRpdGFuaWNfZGF0YWAgenUhIAoKICAgIGBgYHtyfQogICAgdGl0YW5pY19kYXRhIDwtIHJlYWQuY3N2KCJ0aXRhbmljX2RhdGEuY3N2IikKICAgIGBgYAoKCmIpIEJlc3RpbW1lbiBTaWUgZsO8ciBqZWRlcyBNZXJrbWFsLCBvYiBlcyBxdWFsaXRhdGl2L3F1YW50aXRhdGl2IGlzdCB1bmQgYXVmIHdlbGNoZXIgU2thbGEgZXMgZGVmaW5pZXJ0IGlzdCAoTm9taW5hbC0sIE9yZGluYWwtIG9kZXIgS2FyZGluYWxza2FsYSkhIAoKICAgIGBgYHtyfQogICAgbGlicmFyeShrbml0cikKICAgIE1lcmttYWxlIDwtIGMoIlBhc3NlbmdlcklkIiwgIlN1cnZpdmVkIiwgIlBhc3NlbmdlciBDbGFzcyIsICJOYW1lIiwgCiAgICAgICAgICAgICAgICAgICJTZXgiLCAiQWdlIiwgIiMgb2YgU2libGluZyIsICIjIG9mIFBhcmVudHMvQ2hpbGRyZW4iLCAKICAgICAgICAgICAgICAgICAgIlRpY2tldCAjIiwgIkZhcmUiLCAiQ2FiaW4iLCAiUG9ydCBvZiBFbWJhcmthdGlvbiIpCiAgICBRdWFsaVF1YW50aSA8LSBjKCJxdWFsaXRhdGl2IiwgInF1YWxpdGF0aXYiLCAicXVhbGl0YXRpdiIsICJxdWFsaXRhdGl2IiwgCiAgICAgICAgICAgICAgICAgICAgICJxdWFsaXRhdGl2IiwgInF1YW50aXRhdGl2IiwgInF1YW50aXRhdGl2IiwgInF1YW50aXRhdGl2IiwgCiAgICAgICAgICAgICAgICAgICAgICJxdWFsaXRhdGl2IiwgInF1YW50aXRhdGl2IiwgInF1YWxpdGF0aXYiLCAicXVhbGl0YXRpdiIpCiAgICBTa2FsYSA8LSBjKCJOb21pbmFsIiwgIk5vbWluYWwiLCAiT3JkaW5hbCIsICJOb21pbmFsIiwgCiAgICAgICAgICAgICAgICJOb21pbmFsIiwgIkthcmRpbmFsIiwgIkthcmRpbmFsIiwgIkthcmRpbmFsIiwgCiAgICAgICAgICAgICAgICJOb21pbmFsIiwgIkthcmRpbmFsIiwgIk9yZGluYWwiLCAiTm9taW5hbCIpCiAgICAKICAgIFRpdGFuaWNfTWVya21hbGUgPC0gZGF0YS5mcmFtZShNZXJrbWFsZSwgUXVhbGlRdWFudGksIFNrYWxhKQogICAga2FibGUoVGl0YW5pY19NZXJrbWFsZSkKICAgIGBgYAoKYykgQmVzdGltbWVuIFNpZSBkaWUgQW56YWhsIGRlciBQYXNzYWdpZXJlIGltIERhdGVuc2F0eiBtaXQgUi1CZWZlaGxlbiEgCgogICAgYGBge3J9CiAgICBkaW0odGl0YW5pY19kYXRhKSAjIEdpYnQgZGllIERpbWVuc2lvbmVuIGFuCiAgICBucm93KHRpdGFuaWNfZGF0YSkgIyBaw6RobHQgUmVpaGVuCiAgICBgYGAKICAgIAogICAgRGllIEFuemFobCBiZXRyw6RndCA4OTEgUGFzc2FnaWVyZS4KCmQpIEJlc3RpbW1lbiBTaWUgZGllIEFuemFobCBkZXIgTWVya21hbGUgaW0gRGF0ZW5zYXR6IG1pdCBSLUJlZmVobGVuIQoKICAgIGBgYHtyfQogICAgbmFtZXModGl0YW5pY19kYXRhKSAjIEJlemVpY2h1bmdlbiBkZXIgTWVya21hbGUKICAgIG5jb2wodGl0YW5pY19kYXRhKSAjIFrDpGhsdCBTcGFsdGVuCiAgICBgYGAKICAgIERpZSBBbnphaGwgZGVyIE1lcmttYWxlIGJldHLDpGd0IDEyLgoKCmQpIEbDvGdlbiBTaWUgZWluZSBTcGFsdGUgbmFtZW5zIGBTdXJ2aXZlZDJgIHp1bSBEYXRhLUZyYW1lIGB0aXRhbmljX2RhdGFgIGhpbnp1LCB3ZWxjaGUgZGllIMOcYmVybGViZW5kZW4gbWl0IGRlbSBTdHJpbmcgYCJ5ZXMiYCB1bmQgYWxsZSBhbmRlcmVuIG1pdCBgIm5vImAga29kaWVydCEgCiAgICAKICAgIGBgYHtyfQogICAgIyBlcnN0ZXIgVmVyc3VjaAogICAgI3RpdGFuaWNfZGF0YVssICJTdXJ2aXZlZDMiXSA8LSAwCiAgICAjZm9yKGkgaW4gMTo4OTEpewogICAgIyAgaWYodGl0YW5pY19kYXRhW2ksIDJdPT0xKXsKICAgICMgICAgdGl0YW5pY19kYXRhW2ksIDEzXSA8LSAieWVzIgogICAgIyAgfQogICAgIyAgZWxzZSB7CiAgICAjICAgIHRpdGFuaWNfZGF0YVtpLCAxM10gPC0gIm5vIgogICAgIyAgfQogICAgI30KICAgIAogICAgIyB6d2VpdGVyIFZlcnN1Y2gKICAgIHRpdGFuaWNfZGF0YSRTdXJ2aXZlZDIgPC0gIm5vIgogICAgdGl0YW5pY19kYXRhJFN1cnZpdmVkMlt0aXRhbmljX2RhdGEkU3Vydml2ZWQgPT0gMV0gPC0gInllcyIKICAgIFZpZXcodGl0YW5pY19kYXRhKQogICAgYGBgCgoKZSkgQmVzdGltbWVuIFNpZSBkaWUgQW56YWhsIGZlaGxlbmRlciBXZXJ0ZSBkZXMgTWVya21hbHMgYEFnZWAgbWl0IFItQmVmZWhsZW4hCgogICAgCiAgICBgYGB7cn0KICAgIHN1bShpcy5uYSh0aXRhbmljX2RhdGEkQWdlKSkgICAgCiAgICBgYGAKICAgIEJlaSBkZW0gTWVya21hbCBgQWdlYCBmZWhsZW4gMTc3IFdlcnRlLgoKCiMjIEF1ZmdhYmUgMgoKR2ViZW4gU2llIGRlbiBEaWFncmFtbWVuIGluIGRlbiBmb2xnZW5kZW4gQXVmZ2FiZW4gc2lubnZvbGxlIFRpdGVsIHVuZCBiZXNjaHJpZnRlbiBTaWUgYWxsZSBBeGVuIQoKYSkgRXJ6ZXVnZW4gU2llIGVpbiBCYWxrZW5kaWFncmFtbSBkZXMgTWVya21hbHMgYFN1cnZpdmVkMmAsIHdlbGNoZXMgZGllIGFic29sdXRlIEFuemFobCBkZXIgw5xiZXJsZWJlbmRlbiB1bmQgR2VzdG9yYmVuZW4gZ2VnZW7DvGJlcnN0ZWxsdCEKCiAgICBgYGB7cn0KICAgIGggPC0gdGFibGUodGl0YW5pY19kYXRhJFN1cnZpdmVkMikKICAgIGJhcnBsb3QoaCwgbmFtZXMuYXJnID0gYygiTmVpbiIsICJKYSIpLCBtYWluPSJLb25zZXF1ZW56ZW4gZGVzIFRpdGFuaWMgVW5nbMO8Y2tzIiwgCiAgICAgICAgICAgIHhsYWI9IsOcYmVybGVidD8iLCB5bGFiID0iQW56YWhsIiwgeWxpbSA9IGMoMCwgNjAwKSkKICAgIGBgYAoKCmIpIEVyemV1Z2VuIFNpZSB3ZWl0ZXJlIEJhbGtlbmRpYWdyYW1tZSBkZXMgTWVya21hbHMgYFN1cnZpdmVkMmAsIGRpZXNtYWwgbWl0IGRlbiByZWxhdGl2ZW4gSMOkdWZpZ2tlaXRlbiBpbiBQcm96ZW50OgogICAgKGkpIGbDvHIgRnJhdWVuCiAgICAoaWkpIGbDvHIgTcOkbm5lcgogICAgKGlpaSkgZsO8ciBqZWRlIGRlciBkcmVpIEtsYXNzZW4gZGVzIE1lcmttYWxzIGBQY2xhc3NgCiAgICAKICAgIGBgYHtyfQogICAgZl9nZW5kZXIgPC0gcHJvcC50YWJsZSh0YWJsZSh0aXRhbmljX2RhdGEkU2V4LCB0aXRhbmljX2RhdGEkU3Vydml2ZWQpLCAxKSoxMDAKICAgIGZfd29tZW4gPC0gZl9nZW5kZXJbMSxdCiAgICBmX21lbiA8LSBmX2dlbmRlclsyLF0KICAgIGZfY2xhc3MgPC0gcHJvcC50YWJsZSh0YWJsZSh0aXRhbmljX2RhdGEkUGNsYXNzLCB0aXRhbmljX2RhdGEkU3Vydml2ZWQpLCAxKSoxMDAKICAgIGZfMSA8LSBmX2NsYXNzWzEsXQogICAgZl8yIDwtIGZfY2xhc3NbMixdCiAgICBmXzMgPC0gZl9jbGFzc1szLF0KICAgIAogICAgYmFycGxvdChmX3dvbWVuLCBuYW1lcy5hcmcgPSBjKCJOZWluIiwgIkphIiksIG1haW49IsOcYmVybGViZW5zY2hhbmNlbiBGcmF1ZW4iLCAKICAgICAgICAgICAgeGxhYj0iw5xiZXJsZWJ0PyIsIHlsYWIgPSJQcm96ZW50IikKICAgIGJhcnBsb3QoZl9tZW4sIG5hbWVzLmFyZyA9IGMoIk5laW4iLCAiSmEiKSwgbWFpbj0iw5xiZXJsZWJlbnNjaGFuY2VuIE3DpG5uZXIiLCAKICAgICAgICAgICAgeGxhYj0iw5xiZXJsZWJ0PyIsIHlsYWIgPSJQcm96ZW50IikKICAgIGJhcnBsb3QoZl8xLCBuYW1lcy5hcmcgPSBjKCJOZWluIiwgIkphIiksIG1haW49IsOcYmVybGViZW5zY2hhbmNlbiBFcnN0ZSBLbGFzc2UiLCAKICAgICAgICAgICAgeGxhYj0iw5xiZXJsZWJ0PyIsIHlsYWIgPSJQcm96ZW50IikKICAgIGJhcnBsb3QoZl8yLCBuYW1lcy5hcmcgPSBjKCJOZWluIiwgIkphIiksIG1haW49IsOcYmVybGViZW5zY2hhbmNlbiBad2VpdGUgS2xhc3NlIiwgCiAgICAgICAgICAgIHhsYWI9IsOcYmVybGVidD8iLCB5bGFiID0iUHJvemVudCIpCiAgICBiYXJwbG90KGZfMywgbmFtZXMuYXJnID0gYygiTmVpbiIsICJKYSIpLCBtYWluPSLDnGJlcmxlYmVuc2NoYW5jZW4gRHJpdHRlIEtsYXNzZSIsIAogICAgICAgICAgICB4bGFiPSLDnGJlcmxlYnQ/IiwgeWxhYiA9IlByb3plbnQiKQogICAgYGBgCiAgICAKIApjKSBCZXNjaHJlaWJlbiBTaWUga3Vyeiwgd2FzIHdpciBpbiBiKSDDvGJlciBkaWUgw5xiZXJsZWJlbnNjaGFuY2VuIHZlcnNjaGllZGVuZXIgUGFzc2FnaWVyZ3J1cHBlbiBsZXJuZW4hCgogICAgV2lyIHNlaGVuLCBkYXNzIGluc2dlc2FtdCBtZWhyIFBhc3NhZ2llcmUgZ2VzdG9yYmVuIHNpbmQgYWxzIMO8YmVybGVidCBoYWJlbi4gSW5uZXJoYWxiIGRlciBHcnVwcGUgZGVyIEZyYXVlbiBnYWIgZXMgbWVociDDnGJlcmxlYmVuZGUgYWxzIFZlcnN0b3JiZW5lIC0gRnJhdWVuICAgICAgaGF0dGVuIGFsc28gZWluZSByZWNodCBndXRlIMOcYmVybGViZW5zY2hhbmNlLiBJbm5lcmhhbGIgZGVyIEdydXBwZSBkZXIgTcOkbm5lciBnYWIgZXMgbWVociBWZXJzdG9yYmVuZSBhbHMgw5xiZXJsZWJlbmRlIC0gTcOkbm5lciBoYXR0ZW4gYWxzbyBlaGVyIHNjaGxlY2h0ZSAgICAgICAgICDDnGJlcmxlYmVuc2NoYW5jZW4uIEbDvHIgZGllIFBhc3NhZ2llcmUgZGVyIGVyc3RlbiBLbGFzc2Ugd2FyZW4gZGllIMOcYmVybGViZW5zY2hhbmNlbiByZWNodCBndXQsIGbDvHIgZGllIHp3ZWl0ZSBLbGFzc2UgZmFzdCA1MC81MCwgZsO8ciBkaWUgZHJpdHRlIEtsYXNzZSAgICAgICAgICAgICBzY2hsZWNodC4KCgojIyBBdWZnYWJlIDMKCkdlYmVuIFNpZSBkZW4gRGlhZ3JhbW1lbiBpbiBkZW4gZm9sZ2VuZGVuIEF1ZmdhYmVuIHNpbm52b2xsZSBUaXRlbCB1bmQgYmVzY2hyaWZ0ZW4gU2llIGFsbGUgQXhlbiEKCkVyc3RlbGxlbiBTaWUgZGllIEhpc3RvZ3JhbW1lIGluIGEpIHVuZCBiKSBtaXQgZGVyIEdydXBwaWVydW5nIFswLDUpLCBbNSwxMCksIFsxMCwgMTUpIHVzdyEgQmVhY2h0ZW4gU2llLCB6dSB3ZWxjaGVyIEdydXBwZSBkaWUgR3Jlbnp3ZXJ0ZSBnZWjDtnJlbi4gCgphKSBFcnpldWdlbiBTaWUgZWluIEhpc3RvZ3JhbW0gYWJzb2x1dGVyIEjDpHVmaWdrZWl0ZW4gZGVzIE1lcmttYWxzIGBBZ2VgISAKCiAgICBgYGB7cn0KICAgIGJpbnMgPC0gYygwLCA1LCAxMCwgMTUsIDIwLCAyNSwgMzAsIDM1LCA0MCwgNDUsIDUwLCA1NSwgNjAsIDY1LCA3MCwgNzUsIDgwKQogICAgaGlzdCh0aXRhbmljX2RhdGEkQWdlLCBicmVha3MgPSBiaW5zLCBtYWluID0gIkFsdGVyc2dydXBwZW4gZGVyIFBhc3NhZ2llcmUiLCB4bGFiID0gIkFsdGVyIiwgeWxhYiA9ICJBbnphaGwiKQogICAgYGBgCgoKYikgRXJ6ZXVnZW4gU2llIGpld2VpbHMgZWluIEhpc3RvZ3JhbW0gcmVsYXRpdmVyIEjDpHVmaWdrZWl0ZW4gZGVzIE1lcmttYWxzIGBBZ2VgIGbDvHIgZGllIMOcYmVybGViZW5kZW4gdW5kIGRpZSBHZXN0b3JiZW5lbiEgCgogICAgYGBge3J9CiAgICBhZ2Vfc3Vydml2b3JzIDwtIDAKICAgIGFnZV9kZWNlYXNlZCA8LSAwCiAgICBmb3IoaSBpbiAxOjg5MSl7CiAgICAgIGlmKHRpdGFuaWNfZGF0YVtpLCAyXSA9PSAxKXsKICAgICAgICBhZ2Vfc3Vydml2b3JzW2ldIDwtIHRpdGFuaWNfZGF0YVtpLCA2XQogICAgICB9CiAgICAgIGVsc2UgewogICAgICAgIGFnZV9kZWNlYXNlZFtpXSA8LSB0aXRhbmljX2RhdGFbaSwgNl0KICAgICAgfQogICAgfQogICAgYWdlX3N1cnZpdm9ycyA8LSBhZ2Vfc3Vydml2b3JzWyFpcy5uYShhZ2Vfc3Vydml2b3JzKV0KICAgIGFnZV9kZWNlYXNlZCA8LSBhZ2VfZGVjZWFzZWRbIWlzLm5hKGFnZV9kZWNlYXNlZCldCiAgICAKICAgIGhpc3QoYWdlX3N1cnZpdm9ycywgZnJlcSA9IEZBTFNFLCBicmVha3MgPSBiaW5zLAogICAgIHhsYWIgPSAiQWx0ZXIiLCB5bGFiID0gInJlbGF0aXZlIEjDpHVmaWdrZWl0IiwgCiAgICAgbWFpbiA9ICJIaXN0b2dyYW1tIGbDvHIgw5xiZXJsZWJlbmRlIikKICAgIAogICAgaGlzdChhZ2VfZGVjZWFzZWQsIGZyZXEgPSBGQUxTRSwgYnJlYWtzID0gYmlucywKICAgICB4bGFiID0gIkFsdGVyIiwgeWxhYiA9ICJyZWxhdGl2ZSBIw6R1Zmlna2VpdCIsIAogICAgIG1haW4gPSAiSGlzdG9ncmFtbSBmw7xyIFZlcnN0b3JiZW5lIikKCiAgICBgYGAKCgpjKSBCZXNjaHJlaWJlbiBTaWUga3Vyeiwgd2FzIHdpciBpbiBiKSDDvGJlciBkaWUgQWx0ZXJzdmVydGVpbHVuZyBiZWkgZGVuIMOcYmVybGViZW5kZW4gdW5kIEdlc3RvcmJlbmVuIGltIFZlcmdsZWljaCBsZXJuZW4hCgogICAgQmVpIGRlbiDDnGJlcmxlYmVuZGVuIGdhYiBlcyBtZWhyIFBlcnNvbmVuIHp3c2NoZW4gMCB1bmQgMjAsIHVuZCAyMCB1bmQgNDAgSmFocmVuLiBEaWUgbWVpc3RlbiDDnGJlcmxlYmVuZGVuIHVuZCBWZXJzdG9yYmVuZW4gc2luZCB6d2lzY2hlbiAyMCB1bmQgNDAgSmFocmVuIGFsdC4gICAgIEVzIGhhYmVuIG1laHIga2luZGVyIMO8YmVybGVidCBhbHMgZ2VzdG9yYmVuIHNpbmQuIFp3aXNjaGVuIDQwIHVuZCA2MCBKYWhyZW4gc2luZCBmYXN0IGdlbmF1c28gdmllbCBnZXN0b3JiZW4gd2llIMO8YmVybGVidCBoYWJlbi4gSnVuZ2UgTWVuc2NoZW4gendpc2NoZW4gMjAgYmlzICAgICAzNSBoYWJlbiBow6R1ZmlnZXIgw7xiZXJsZWJ0IGFscyBzaWUgZ2VzdG9yYmVuIHNpbmQuCiAgICBEaWUgR3J1cHBlIGRlciAyMCBiaXMgMjUtasOkaHJpZ2VuIGlzdCBiZWkgZGVuIFZlcnN0b3JiZW5lbiBhbSBow6R1Zmlnc3Rlbi9ncsO2w590ZW4uIEJlaSBkZW4gw5xiZXJsZWJlbmRlbiBpc3QgZGllIEdydXBwZSBkZXIgMjAgYmlzIDM1LWrDpGhyaWdlbiBhbSAgICAgICAgICAgICAgICAgICAgZ3LDtsOfdGVuL2jDpHVmaWdzdGVuLgoK</div>
+<div id="rmd-source-code">LS0tCm91dHB1dDoKICBwZGZfZG9jdW1lbnQ6IGRlZmF1bHQKICBodG1sX25vdGVib29rOiBkZWZhdWx0CiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdAotLS0KCiMgWndlaXRlIEhhdXNhcmJlaXQgaW4gU3RhdGlzdGlrIGbDvHIgV2lydHNjaGFmdHNpbmZvcm1hdGlrZXIKIyMgSFRXIEJlcmxpbiwgU29tbWVyc2VtZXN0ZXIgMjAxNwoKKipOYW1lLCBNYXRyaWtlbG51bW1lcjoqKiBKZW5ueSBSb3RoZSwgNTQ0MTc5ICAKKipOYW1lLCBNYXRyaWtlbG51bW1lcjoqKiBMYXVyYSBMYXVnd2l0eiwgNTQ0MDQ5CgoKIyMgRm9ybWFsaXTDpHRlbgoKQml0dGUgYmVhcmJlaXRlbiBTaWUgZGllc2UgSGF1c2FyYmVpdCBpbiBad2VpZXJncnVwcGVuLCBpbiBkZW5lbiBiZWlkZSBTdHVkaWVyZW5kZSBiZWkgSGVycm4gU3BvdHQgb2RlciBiZWlkZSBiZWkgSGVycm4gSGVpbWFubiBlaW5nZXNjaHJpZWJlbiBzaW5kLiBHcnVwcGVuIHZvbiBkcmVpIG9kZXIgbWVociBTdHVkaWVyZW5kZW4gc2luZCBuaWNodCB6dWdlbGFzc2VuLiBTZXR6ZW4gU2llIGJpdHRlIElocmUgYmVpZGVuIE5hbWVuIHVuZCBNYXRyaWtlbG51bW1lcm4gb2JlbiBlaW4uCgoKw5ZmZm5lbiBTaWUgZGFzIERva3VtZW50IGB0aXRhbmljLlJtZGAgaW4gUlN0dWRpbywgbMO2c2VuIFNpZSBhbGxlIEF1ZmdhYmVuIG1pdCBSIHVuZCAqKmbDvGdlbiBTaWUgYWxsZSBBbnR3b3J0ZW4genUgZGllc2VtIFItTWFya2Rvd24tRG9rdW1lbnQgaGluenUsIGVpbnNjaGxpZcOfbGljaCBkZXMgUi1Db2RlcyoqLCB3aWUgU2llIGVzIGJlcmVpdHMgYmVpIGRlbiDDnGJ1bmdzYmzDpHR0ZXJuIGdldGFuIGhhYmVuLiBadXPDpHR6bGljaGUgaGFuZGdlc2NocmllYmVuZSBMw7ZzdW5nZW4gb2RlciBFcmtsw6RydW5nZW4gc2luZCBuaWNodCB6dWdlbGFzc2VuIGViZW5zb3dlbmlnIHdpZSBMw7ZzdW5nZW4sIGRpZSBtaXQgYW5kZXJlciBTb2Z0d2FyZSB3aWUgei5CLiBNaWNyb3NvZnQgRXhjZWwgZXJzdGVsbHQgd3VyZGVuLgoKTWVociBJbmZvcm1hdGlvbmVuIMO8YmVyIFItTWFya2Rvd24tRG9rdW1lbnRlIGZpbmRlbiBTaWUgaW0gSW50ZXJuZXQgdW50ZXIgaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbS9sZXNzb24tMS5odG1sLiBTaWUga8O2bm5lbiBkaWUgTXVzdGVybMO2c3VuZ2VuIGluIFJNYXJrZG93biB6dSB1bnNlcmVuIMOcYnVuZ3NibMOkdHRlcm4gYWxzIEJlaXNwaWVsZSBoZXJhbnppZWhlbi4KCldlbm4gU2llIG1pdCBkZXIgQmVhcmJlaXR1bmcgZmVydGlnIHNpbmQsIGVyemV1Z2VuIFNpZSBiaXR0ZSBpbiBSU3R1ZGlvIG1pdCBkZW0gS25vcGYgKipLbml0IFBERioqIGVpbiBQREYtRG9rdW1lbnQgb2RlciB3w6RobGVuIGFsdGVybmF0aXYgw7xiZXIgZGFzIERyZWllY2sgbmViZW4gKipLbml0IFBERioqIGRpZSBPcHRpb24gKipLbml0IEhUTUwqKiwgdW0gZWluIEhUTUwtRG9rdW1lbnQgenUgZXJ6ZXVnZW4uIEbDvHIgKipLbml0IFBERioqIGlzdCBkaWUgSW5zdGFsbGF0aW9uIGVpbmVyIExhVGVYLURpc3RyaWJ1dGlvbiB3aWUgTWlrVGVYIGbDvHIgV2luZG93cyAobWlrdGV4Lm9yZykgb2RlciBNYWNUZVggZsO8ciBNYWMgT1MgWCAod3d3LnR1Zy5vcmcvbWFjdGV4LykgZXJmb3JkZXJsaWNoLiAqKktuaXQgSFRNTCoqIGZ1bmt0aW9uaWVydCBhdWNoIG9obmUgTGFUZVguICoqRHJ1Y2tlbiBTaWUgZGFzIHNvIGVyemV1Z3RlIERva3VtZW50IGF1cyB1bmQgZ2ViZW4gU2llIGVzIGluIFBhcGllcmZvcm0gYWIqKi4KCiMjIEFiZ2FiZQoKKiAqKkVsZWt0cm9uaXNjaCBpbiBNb29kbGUgYmlzIHNww6R0ZXN0ZW5zIE1vbnRhZywgMTAuMDcuMjAxNyB1bSAxNjowMCoqCiAgICAqIHNvd29obCBkYXMgUk1hcmtkb3duLVF1ZWxsZG9rdW1lbnQKICAgICogYWxzIGF1Y2ggZGFzIGRhcmF1cyBlcnpldWd0ZSBQREYtIG9kZXIgSFRNTC1Eb2t1bWVudCAgCiogKipVTkQgaW4gUGFwaWVyZm9ybSBzcMOkdGVzdGVucyBhbSAxMC4wNy4gYnp3LiAxMS4wNy4qKiBiZWkgSGVycm4gSGVpbWFubiBiencuIEhlcnJuIFNwb3R0IGluIGRlbiDDnGJ1bmdlbiBvZGVyIGRlciBWb3JsZXN1bmcuIFNww6R0ZXJlIEFiZ2FiZW4gd2VyZGVuIG5pY2h0IGJlcsO8Y2tzaWNodGlndCB1bmQgZsO8aHJlbiBhdXRvbWF0aXNjaCB6dSBlaW5lciBCZXdlcnR1bmcgbWl0IDAgUHVua3Rlbi4gCgpEaWUgRXJnZWJuaXNzZSBhbGxlciBIYXVzYXJiZWl0ZW4gd2VyZGVuIHp1c2FtbWVuIG1pdCAzMCUgZ2V3aWNodGV0LCBkYXMgRXJnZWJuaXMgZGVyIEtsYXVzdXIgbWl0IDcwJS4gCgoqKldpY2h0aWc6KiogU29iYWxkIFNpZSBlaW5lIEhhdXNhcmJlaXQgYWJnZWJlbiwgaGF0IGRhbWl0IElocmUgUHLDvGZ1bmdzbGVpc3R1bmcgZsO8ciBkYXMgU29tbWVyc2VtZXN0ZXIgMjAxNyBiZWdvbm5lbiwgZGllIG1pdCBkZXIgS2xhdXN1ciBhYmdlc2NobG9zc2VuIHdpcmQuIFdlbm4gU2llIGVpbmUgSGF1c2FyYmVpdCBhYmdlYmVuLCBhYmVyIGRpZSBLbGF1c3VyIG5pY2h0IGltIFNvbW1lcnNlbWVzdGVyIDIwMTcgbWl0c2NocmVpYmVuLCBzaW5kIFNpZSBhdXRvbWF0aXNjaCBkdXJjaGdlZmFsbGVuIHVuZCBkaWUgUHVua3RlIGRlciBIYXVzYXJiZWl0ZW4gdmVyZmFsbGVuLiBEaWVzZSBSZWdlbHVuZyBpc3QgaW4gZGVyIFByw7xmdW5nc29yZG51bmcgZmVzdGdlbGVndC4KClZpZWwgRXJmb2xnLCAKCklocmUgRG96ZW50ZW4gTWFydGluIFNwb3R0IHVuZCBNaWNoYWVsIEhlaW1hbm4KClN0YW5kIGByIGZvcm1hdChTeXMuRGF0ZSgpLCBmb3JtYXQ9JyVkLiVtLiVZJylgCgpcbmV3cGFnZQoKIyMgQXVmZ2FiZW4KCldpZSBpbiBkZXIgZXJzdGVuIEhhdXNhcmJlaXQgYW5hbHlzaWVyZW4gd2lyIGRpZSBQYXNzYWdpZXJkYXRlbiBgdGl0YW5pY19kYXRhLmNzdmAgZGVzIEtyZXV6ZmFocnRzY2hpZmZlcyBUaXRhbmljLiBXaXIgbGVzZW4gZGllIERhdGVuIGVpbiB1bmQgZsO8Z2VuIGRpZSBTcGFsdGUgYFN1cnZpdmVkMmAgaGluenUsIGRpZSBkaWUgV2VydGUgZGVzIE1lcmttYWxzIGBTdXJ2aXZlZGAgYW5zdGF0dCAwLzEgbWl0ICpuby95ZXMqIGtvZGllcnQuCgpgYGB7cn0KIyBzZXR6ZW4gU2llIGhpZXIgZGVuIHJpY2h0aWdlbiBQZmFkIGbDvHIgdGl0YW5pY19kYXRhLmNzdiBlaW4KdGl0YW5pY19kYXRhIDwtIHJlYWQuY3N2KCJ0aXRhbmljX2RhdGEuY3N2IikKdGl0YW5pY19kYXRhJFN1cnZpdmVkMiA8LSBmYWN0b3IodGl0YW5pY19kYXRhJFN1cnZpdmVkLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGV2ZWxzID0gYygwLDEpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCJubyIsICJ5ZXMiKSkKYGBgCgoKIyMgQXVmZ2FiZSAxICgxNSBQdW5rdGUpCgpXaXIgdW50ZXJzdWNoZW4sIG9iIHNpY2ggZGllIMOcYmVybGViZW5zY2hhbmNlbiB3ZWlibGljaGVyIHVuZCBtw6RubmxpY2hlciBQYXNzYWdpZXJlIHVudGVyc2NoZWlkZW4uIAoKYSkgU3RlbGxlbiBTaWUgZGllIEtvbnRpbmdlbnp0YWJlbGxlIGRlciBhYnNvbHV0ZW4gSMOkdWZpZ2tlaXRlbiB2b24gYFN1cnZpdmVkMmAgdW5kIGBTZXhgIGF1ZiEKCmBgYHtyfQpoX3N1cnZfZ2VuZGVyIDwtIHRhYmxlKHRpdGFuaWNfZGF0YSRTdXJ2aXZlZDIsIHRpdGFuaWNfZGF0YSRTZXgpCmFkZG1hcmdpbnMoaF9zdXJ2X2dlbmRlcikKYGBgCgoKYikgU3RlbGxlbiBTaWUgZGllIEtvbnRpbmdlbnp0YWJlbGxlIGRlciByZWxhdGl2ZW4gSMOkdWZpZ2tlaXRlbiB2b24gYFN1cnZpdmVkMmAgdW5kIGBTZXhgIGluIFByb3plbnQgYXVmIQoKYGBge3J9CmZfc3Vydl9nZW5kZXIgPC0gcHJvcC50YWJsZShoX3N1cnZfZ2VuZGVyKQpyb3VuZChhZGRtYXJnaW5zKGZfc3Vydl9nZW5kZXIpKjEwMCwgZGlnaXRzID0gMikKYGBgCgoKYykgQmVyZWNobmVuIFNpZSBmb2xnZW5kZSBiZWRpbmd0ZSByZWxhdGl2ZSBIw6R1Zmlna2VpdGVuIGluIFByb3plbnQ6CiAgICBpKSBmKFN1cnZpdmVkMiA9IHllcyB8IFNleCA9IGZlbWFsZSkKICAgIGlpKSBmKFN1cnZpdmVkMiA9IHllcyB8IFNleCA9IG1hbGUpCiAgICBpaWkpIGYoU2V4ID0gZmVtYWxlIHwgU3Vydml2ZWQyID0geWVzKQogICAgaXYpIGYoU2V4ID0gbWFsZSB8IFN1cnZpdmVkMiA9IHllcykKICAgIAogICAgCmBgYHtyfQoKYGBgCgogICAgCmQpIFdlbGNoZSBkZXIgcmVsYXRpdmVuIEjDpHVmaWdrZWl0ZW4gaW4gYykgYmVzY2hyZWliZW4gZGllIMOcYmVybGViZW5zY2hhbmNlIHZvbiBGcmF1ZW4gYnp3LiB2b24gTcOkbm5lcm4/CgplKSBHZW5lcmllcmVuIFNpZSBlaW5lbiBNb3NhaWtwbG90IGRlciBNZXJrbWFsZSBgU3Vydml2ZWQyYCB1bmQgYFNleGAuIFNwYWx0ZW4gU2llIGRhYmVpIGVyc3QgbmFjaCBgU2V4YCBhdWYsIGRhbm4gbmFjaCBgU3Vydml2ZWQyYC4gQmVzY2hyaWZ0ZW4gU2llIGRpZSBBY2hzZW4gdW5kIHZlcmdlYmVuIFNpZSBlaW5lbiBzaW5udm9sbGVuIFRpdGVsISAKCmYpIEJlcmVjaG5lbiBTaWUgZGVuIFBoaS1Lb2VmZml6aWVudGVuIHZvbiBgU3Vydml2ZWQyYCB1bmQgYFNleGAhIFdhcyBtaXNzdCBkaWVzZXI/IFdhcyBzYWd0IHVucyBpbiBkaWVzZW0gRmFsbCBkZXIgV2VydCB2b24gUGhpPwoKZykgU2luZCBkaWUgTWVya21hbGUgYFN1cnZpdmVkMmAgdW5kIGBTZXhgIHN0YXRpc3Rpc2NoIHVuYWJow6RuZ2lnIHZvbmVpbmFuZGVyPyBCZWdyw7xuZGVuIFNpZSBJaHJlIEFudHdvcnQhCgoKIyMgQXVmZ2FiZSAyICg5IFB1bmt0ZSkKCldpciB1bnRlcnN1Y2hlbiwgb2IgZGllIMOcYmVybGViZW5zY2hhbmNlbiBtw6RubmxpY2hlciB1bmQgd2VpYmxpY2hlciBQYXNzYWdpZXJlIGluIGFsbGVuIGRyZWkgUGFzc2FnaWVya2xhc3NlbiBgUGNsYXNzYCBpbiBlaW5lbSDDpGhubGljaGVuIFZlcmjDpGx0bmlzIHN0ZWhlbi4gCgphKSBHZW5lcmllcmVuIFNpZSBNb3NhaWtwbG90cyBkZXIgTWVya21hbGUgYFN1cnZpdmVkMmAgdW5kIGBTZXhgIHdpZSBpbiBBdWZnYWJlIDFlKSwgamV3ZWlscyBlaW5lbiBmw7xyIGRpZSBQYXNzYWdpZXJlIGRlciBLbGFzc2UgMSwgMiB1bmQgMyEgQmVzY2hyaWZ0ZW4gU2llIGRpZSBBY2hzZW4gdW5kIHZlcmdlYmVuIFNpZSBlaW5lbiBzaW5udm9sbGVuIFRpdGVsIQoKYikgQmVyZWNobmVuIFNpZSBkZW4gUGhpLUtvZWZmaXppZW50ZW4gdm9uIGBTdXJ2aXZlZDJgIHVuZCBgU2V4YCBqZXdlaWxzIGbDvHIgS2xhc3NlIDEsIDIgdW5kIDMhIAoKYykgV2FzIGJlZGV1dGV0IGVzLCBkYXNzIGRlciBQaGktS29lZmZpemllbnQgZsO8ciBLbGFzc2UgMSBncsO2w59lciBpc3QgYWxzIGbDvHIgZGllIGFuZGVyZW4gYmVpZGVuIEtsYXNzZW4/CgojIyBBdWZnYWJlIDMgKDEyIFB1bmt0ZSkKCldpciB1bnRlcnN1Y2hlbiBkaWUgw5xiZXJsZWJlbnNjaGFuY2VuIGluIHZlcnNjaGllZGVuZW4gQWx0ZXJncnVwcGVuLiAKCmEpIEdydXBwaWVyZW4gU2llIGBBZ2VgIHdpZSBpbiBBdWZnYWJlIDMgZGVyIGVyc3RlbiBIYXVzYXJiZWl0IGluIGRpZSBJbnRlcnZhbGxlIFswLDUpLCBbNSwxMCksIFsxMCwgMTUpIHVzdyEgQmVhY2h0ZW4gU2llIHdpZWRlciwgenUgd2VsY2hlciBHcnVwcGUgZGllIEdyZW56d2VydGUgZGVyIEludGVydmFsbGUgZ2Vow7ZyZW4uIEhpbndlaXM6IFNlaGVuIFNpZSBzaWNoIGRpZSBGdW5rdGlvbiBgY3V0KClgIGFuLCBkZXJlbiBTeW50YXggZGVyIHZvbiBgaGlzdCgpYCDDpGhuZWx0LgoKICAgIEbDvGdlbiBTaWUgZGllIEFsdGVyc2dydXBwZSBhbHMgU3BhbHRlIGBBZ2VHcm91cGAgZGVtIERhdGEtRnJhbWUgYHRpdGFuaWNfZGF0YWAgenUuICAKICAgIAogICAgYGBge3J9CiAgICAjIEdydXBwaWVydW5nIHZvbiBBZ2UKICAgIGJpbnMgPC0gYygwLCA1LCAxMCwgMTUsIDIwLCAyNSwgMzAsIDM1LCA0MCwgNDUsIDUwLCA1NSwgNjAsIDY1LCA3MCwgNzUsIDgwKQogICAgYWdlX2dyb3VwIDwtIHRhYmxlKGN1dCh0aXRhbmljX2RhdGEkQWdlLCBicmVha3MgPSBiaW5zKSkKCiAgICAjIEFubGVnZW4gdW5kIEJlZsO8bGxlbiBkZXIgU3BhbHRlICdBZ2VHcm91cCcKICAgIGxpYnJhcnkoVGVhY2hpbmdEZW1vcykKICAgIHRpdGFuaWNfZGF0YVssICJBZ2VHcm91cCJdIDwtIDAKICAgIGZvcihpIGluIDE6ODkxKXsKICAgICAgaWYoaXMubmEodGl0YW5pY19kYXRhW2ksIDZdKSl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSBOQQogICAgICB9CiAgICAgIGVsc2UgaWYoMC4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTUuMCl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSAiKDAsNV0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoNS4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTEwLjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIig1LDEwXSIKICAgICAgfQogICAgICBlbHNlIGlmICgxMC4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTE1LjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIigxMCwxNV0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoMTUuMCAlPCUgdGl0YW5pY19kYXRhW2ksIDZdICU8PSUyMC4wKXsKICAgICAgICB0aXRhbmljX2RhdGFbaSwgMTRdIDwtICIoMTUsMjBdIgogICAgICB9CiAgICAgIGVsc2UgaWYgKDIwLjAgJTwlIHRpdGFuaWNfZGF0YVtpLCA2XSAlPD0lMjUuMCl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSAiKDIwLDI1XSIKICAgICAgfQogICAgICBlbHNlIGlmICgyNS4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTMwLjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIigyNSwzMF0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoMzAuMCAlPCUgdGl0YW5pY19kYXRhW2ksIDZdICU8PSUzNS4wKXsKICAgICAgICB0aXRhbmljX2RhdGFbaSwgMTRdIDwtICIoMzAsMzVdIgogICAgICB9CiAgICAgIGVsc2UgaWYgKDM1LjAgJTwlIHRpdGFuaWNfZGF0YVtpLCA2XSAlPD0lNDAuMCl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSAiKDM1LDQwXSIKICAgICAgfQogICAgICBlbHNlIGlmICg0MC4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTQ1LjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIig0MCw0NV0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoNDUuMCAlPCUgdGl0YW5pY19kYXRhW2ksIDZdICU8PSU1MC4wKXsKICAgICAgICB0aXRhbmljX2RhdGFbaSwgMTRdIDwtICIoNDUsNTBdIgogICAgICB9CiAgICAgIGVsc2UgaWYgKDUwLjAgJTwlIHRpdGFuaWNfZGF0YVtpLCA2XSAlPD0lNTUuMCl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSAiKDUwLDU1XSIKICAgICAgfQogICAgICBlbHNlIGlmICg1NS4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTYwLjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIig1NSw2MF0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoNjAuMCAlPCUgdGl0YW5pY19kYXRhW2ksIDZdICU8PSU2NS4wKXsKICAgICAgICB0aXRhbmljX2RhdGFbaSwgMTRdIDwtICIoNjAsNjVdIgogICAgICB9CiAgICAgIGVsc2UgaWYgKDY1LjAgJTwlIHRpdGFuaWNfZGF0YVtpLCA2XSAlPD0lNzAuMCl7CiAgICAgICAgdGl0YW5pY19kYXRhW2ksIDE0XSA8LSAiKDY1LDcwXSIKICAgICAgfQogICAgICBlbHNlIGlmICg3MC4wICU8JSB0aXRhbmljX2RhdGFbaSwgNl0gJTw9JTc1LjApewogICAgICAgIHRpdGFuaWNfZGF0YVtpLCAxNF0gPC0gIig3MCw3NV0iCiAgICAgIH0KICAgICAgZWxzZSBpZiAoNzUuMCAlPCUgdGl0YW5pY19kYXRhW2ksIDZdICU8PSU4MC4wKXsKICAgICAgICB0aXRhbmljX2RhdGFbaSwgMTRdIDwtICIoNzUsODBdIgogICAgICB9CiAgICB9CiAgICBgYGAKCmIpIEJlcmVjaG5lbiBTaWUgZsO8ciBqZWRlIEFsdGVyc2dydXBwZSBbMCw1KSwgWzUsMTApIHVzdy4gZGllIMOcYmVybGViZW5zY2hhbmNlIChyZWxhdGl2ZSBIw6R1Zmlna2VpdCB6dSDDvGJlcmxlYmVuKSBpbiBQcm96ZW50ISAKCmBgYHtyfQojIEVyc3RlbGxlIEtvbnRpbmdlbnp0YWJlbGxlIC8gYWJzb2x1dGUgSMOkdWZpZ2tlaXRlbgpoX2FnZV9zdXJ2aXZhbCA8LSB0YWJsZSh0aXRhbmljX2RhdGEkQWdlR3JvdXAsIHRpdGFuaWNfZGF0YSRTdXJ2aXZlZDIpCmFkZG1hcmdpbnMoaF9hZ2Vfc3Vydml2YWwpCgojIEVybWl0dGxlIGdlbWVpbnNhbWUgcmVsYXRpdmUgSMOkdWZpZ2tlaXRlbgpmX2FnZV9zdXJ2aXZhbCA8LSBwcm9wLnRhYmxlKGhfYWdlX3N1cnZpdmFsKQpmX2FnZV9zdXJ2aXZhbF9tYXJnaW5zIDwtIGFkZG1hcmdpbnMoZl9hZ2Vfc3Vydml2YWwpCnJvdW5kKGZfYWdlX3N1cnZpdmFsX21hcmdpbnMqMTAwLCAyKQoKIyBFcm1pdHRsZSBiZWRpbmd0ZSByZWxhdGl2ZSBIw6R1Zmlna2VpdGVuIGYoJGFnZV9ncm91cCB8IHN1cnZpdmVkKQpoX3N1cnZpdm9ycyA8LSBtYXRyaXgoaF9hZ2Vfc3Vydml2YWxbLDJdLCBucm93ID0gMTYsIG5jb2wgPSAxLCAgZGltbmFtZXM9bGlzdChjKCIoMCw1XSIsICIoNSwxMF0iLCAiKDEwLDE1XSIsICIoMTUsMjBdIiwgIigyMCwyNV0iLCAiKDI1LDMwXSIsICIoMzAsMzVdIiwgIigzNSw0MF0iLCAiKDQwLDQ1XSIsICIoNDUsNTBdIiwgIig1MCw1NV0iLCAiKDU1LDYwXSIsICIoNjAsNjVdIiwgIig2NSw3MF0iLCAiKDcwLDc1XSIsICIoNzUsODBdIiksIGMoIlN1cnZpdmVkIikpKQpyb3VuZChwcm9wLnRhYmxlKGhfc3Vydml2b3JzKSAqMTAwLCAyKQpgYGAKCgpjKSBTdGVsbGVuIFNpZSBkYXMgRXJnZWJuaXMgYXVzIGIpIGFscyBCYWxrZW5kaWFncmFtbSBkYSAtLSBmw7xyIGplZGUgQWx0ZXJzZ3J1cHBlIGVpbmVuIEJhbGtlbiEgQmVzY2hyaWZ0ZW4gU2llIGFsbGUgQXhlbiB1bmQgZ2ViZW4gZGVtIERpYWdyYW1tIGVpbmVuIHNpbm52b2xsZW4gVGl0ZWwhCgpgYGB7cn0KYmFycGxvdChmX2FnZV9zdXJ2aXZhbCkKYGBgCgoKZCkgV2VsY2hlIHp3ZWkgQWx0ZXJzZ3J1cHBlbiBoYXR0ZW4gZGllIGdyw7bDn3RlIMOcYmVybGViZW5zY2hhbmNlPyBTaW5kIGJlaWRlIEFsdGVyc2dydXBwZW4gc3RhdGlzdGlzY2ggZ2VzZWhlbiBnbGVpY2ggYmVkZXV0ZW5kPwoK</div>
 
 
 

@@ -113,10 +113,94 @@ Wir untersuchen die Überlebenschancen in verschiedenen Altergruppen.
 a) Gruppieren Sie `Age` wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle [0,5), [5,10), [10, 15) usw! Beachten Sie wieder, zu welcher Gruppe die Grenzwerte der Intervalle gehören. Hinweis: Sehen Sie sich die Funktion `cut()` an, deren Syntax der von `hist()` ähnelt.
 
     Fügen Sie die Altersgruppe als Spalte `AgeGroup` dem Data-Frame `titanic_data` zu.  
+    
+    ```{r}
+    # Gruppierung von Age
+    bins <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80)
+    age_group <- table(cut(titanic_data$Age, breaks = bins))
+
+    # Anlegen und Befüllen der Spalte 'AgeGroup'
+    library(TeachingDemos)
+    titanic_data[, "AgeGroup"] <- 0
+    for(i in 1:891){
+      if(is.na(titanic_data[i, 6])){
+        titanic_data[i, 14] <- NA
+      }
+      else if(0.0 %<% titanic_data[i, 6] %<=%5.0){
+        titanic_data[i, 14] <- "(0,5]"
+      }
+      else if (5.0 %<% titanic_data[i, 6] %<=%10.0){
+        titanic_data[i, 14] <- "(5,10]"
+      }
+      else if (10.0 %<% titanic_data[i, 6] %<=%15.0){
+        titanic_data[i, 14] <- "(10,15]"
+      }
+      else if (15.0 %<% titanic_data[i, 6] %<=%20.0){
+        titanic_data[i, 14] <- "(15,20]"
+      }
+      else if (20.0 %<% titanic_data[i, 6] %<=%25.0){
+        titanic_data[i, 14] <- "(20,25]"
+      }
+      else if (25.0 %<% titanic_data[i, 6] %<=%30.0){
+        titanic_data[i, 14] <- "(25,30]"
+      }
+      else if (30.0 %<% titanic_data[i, 6] %<=%35.0){
+        titanic_data[i, 14] <- "(30,35]"
+      }
+      else if (35.0 %<% titanic_data[i, 6] %<=%40.0){
+        titanic_data[i, 14] <- "(35,40]"
+      }
+      else if (40.0 %<% titanic_data[i, 6] %<=%45.0){
+        titanic_data[i, 14] <- "(40,45]"
+      }
+      else if (45.0 %<% titanic_data[i, 6] %<=%50.0){
+        titanic_data[i, 14] <- "(45,50]"
+      }
+      else if (50.0 %<% titanic_data[i, 6] %<=%55.0){
+        titanic_data[i, 14] <- "(50,55]"
+      }
+      else if (55.0 %<% titanic_data[i, 6] %<=%60.0){
+        titanic_data[i, 14] <- "(55,60]"
+      }
+      else if (60.0 %<% titanic_data[i, 6] %<=%65.0){
+        titanic_data[i, 14] <- "(60,65]"
+      }
+      else if (65.0 %<% titanic_data[i, 6] %<=%70.0){
+        titanic_data[i, 14] <- "(65,70]"
+      }
+      else if (70.0 %<% titanic_data[i, 6] %<=%75.0){
+        titanic_data[i, 14] <- "(70,75]"
+      }
+      else if (75.0 %<% titanic_data[i, 6] %<=%80.0){
+        titanic_data[i, 14] <- "(75,80]"
+      }
+    }
+    ```
 
 b) Berechnen Sie für jede Altersgruppe [0,5), [5,10) usw. die Überlebenschance (relative Häufigkeit zu überleben) in Prozent! 
 
+```{r}
+# Erstelle Kontingenztabelle / absolute Häufigkeiten
+h_age_survival <- table(titanic_data$AgeGroup, titanic_data$Survived2)
+addmargins(h_age_survival)
+
+# Ermittle gemeinsame relative Häufigkeiten
+f_age_survival <- prop.table(h_age_survival)
+f_age_survival_margins <- addmargins(f_age_survival)
+round(f_age_survival_margins*100, 2)
+
+# Ermittle bedingte relative Häufigkeiten f($age_group | survived)
+h_survivors <- matrix(h_age_survival[,2], nrow = 16, ncol = 1,  dimnames=list(c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]"), c("Survived")))
+round(prop.table(h_survivors) *100, 2)
+```
+
+
 c) Stellen Sie das Ergebnis aus b) als Balkendiagramm da -- für jede Altersgruppe einen Balken! Beschriften Sie alle Axen und geben dem Diagramm einen sinnvollen Titel!
+
+```{r}
+barplot(f_age_survival)
+```
+
 
 d) Welche zwei Altersgruppen hatten die größte Überlebenschance? Sind beide Altersgruppen statistisch gesehen gleich bedeutend?
 
