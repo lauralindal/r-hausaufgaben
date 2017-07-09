@@ -103,7 +103,7 @@ c) Berechnen Sie folgende bedingte relative Häufigkeiten in Prozent:
     
 d) Welche der relativen Häufigkeiten in c) beschreiben die Überlebenschance von Frauen bzw. von Männern?
 
-  Die relativen Häufigkeiten über die Zeile "survived"=yes gibt uns hier die korrekte Auskunft. Frauen haben zu `r i3`% überlebt und Männer zu `r i4`%.
+  Die relativen Häufigkeiten über die Spalten geben uns hier die korrekte Auskunft. Frauen haben zu `r i1`% überlebt und Männer zu `r i2`%.
 
 e) Generieren Sie einen Mosaikplot der Merkmale `Survived2` und `Sex`. Spalten Sie dabei erst nach `Sex` auf, dann nach `Survived2`. Beschriften Sie die Achsen und vergeben Sie einen sinnvollen Titel! 
 
@@ -174,10 +174,13 @@ a) Gruppieren Sie `Age` wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle
     
     ```{r}
     # Gruppierung von Age
-    bins <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80)
+    bins <- c(seq(0,85,5))
     age_group <- table(cut(titanic_data$Age, breaks = bins, include.lowest = TRUE, right = FALSE))
+    age_group
 
     # Anlegen und Befüllen der Spalte 'AgeGroup'
+    # Das wäre auch einfacher gegangen, ist mir aber erst später aufgefallen - egal :)
+    
     library(TeachingDemos)
     titanic_data[, "AgeGroup"] <- 0
     for(i in 1:891){
@@ -188,7 +191,7 @@ a) Gruppieren Sie `Age` wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle
         titanic_data[i, 14] <- "[0,5)"
       }
       else if (5.0 %<=% titanic_data[i, 6] %<%10.0){
-        titanic_data[i, 14] <- "[5,10)"
+        titanic_data[i, 14] <- "[05,10)"
       }
       else if (10.0 %<=% titanic_data[i, 6] %<%15.0){
         titanic_data[i, 14] <- "[10,15)"
@@ -242,28 +245,46 @@ b) Berechnen Sie für jede Altersgruppe [0,5), [5,10) usw. die Überlebenschance
 
 ```{r}
 # Erstelle Kontingenztabelle / absolute Häufigkeiten
-h_age_survival <- table(titanic_data$AgeGroup, titanic_data$Survived2)
-kable(addmargins(h_age_survival))
+h_age_survival <- table(titanic_data$AgeGroup, titanic_data$Survived2) # leider geht hier [75, 80) verloren (weil 0? oder wegen den Levels?)
+kable(addmargins(h_age_survival)) 
 
 # Ermittle gemeinsame relative Häufigkeiten
 f_age_survival <- prop.table(h_age_survival)
 f_age_survival_margins <- addmargins(f_age_survival)
 kable(round(f_age_survival_margins*100, 2))
 
-# Ermittle bedingte relative Häufigkeiten f($age_group | survived)
-h_survivors <- matrix(h_age_survival[,2], nrow = 16, ncol = 1,  dimnames=list(c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]"), c("Survived")))
+# Ermittle bedingte relative Häufigkeiten f( survived | $age_group )
+h_survivors <- matrix(h_age_survival[,2], nrow = 17, ncol = 1,  dimnames=list(c("[0,5)", "[5,10)", "[10,15)", "[15,20)", "[20,25)", "[25,30)", "[30,35)", "[35,40)", "[40,45)", "[45,50)", "[50,55)", "[55,60)", "[60,65)", "[65,70)", "[70,75)", "[75,80)", "[80,85)"), c("Survived")))
 f_survivors <- prop.table(h_survivors)
 f_survivors_rounded <- round(f_survivors * 100, 2)
 kable(f_survivors_rounded)
+
+# Ermittle Überlebenschance (relative Häufigkeit über Zeile)
+
+f_age_survival_margins_1 <- f_age_survival_margins
+for(i in 1:17){
+  f_age_survival_margins_1[i,2] <- (f_age_survival_margins[i,2] / f_age_survival_margins[i,3]) * 100
+}
+
+f_age_survival_margins_1 <- f_age_survival_margins_1[,2]
+f_age_survival_margins_1 <- f_age_survival_margins_1[-18]
+
+foo <- data.frame(f_age_survival_margins_1)
+kable(foo)
+
+# Überlebenschance einzelne Zeile
+prop.table(h_age_survival[3,])
 ```
 
 
 c) Stellen Sie das Ergebnis aus b) als Balkendiagramm da -- für jede Altersgruppe einen Balken! Beschriften Sie alle Axen und geben dem Diagramm einen sinnvollen Titel!
 
 ```{r}
-dims <- c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]")
+dims <- c("[0,5)", "[5,10)", "[10,15)", "[15,20)", "[20,25)", "[25,30)", "[30,35)", "[35,40)", "[40,45)", "[45,50)", "[50,55)", "[55,60)", "[60,65)", "[65,70)", "[70,75)", "[80,85)")
 
-barplot(f_survivors[ ,1], names.arg = dims, main = "Überlebenschance: f($age_group | survived)", xlab = "Age Group", ylab = "Relative Häufigkeit", cex.names = 0.8)
+foo$f_age_survival_margins_1
+
+barplot(foo$f_age_survival_margins_1[1:16], names.arg = dims, main = "Überlebenschance: f( survived | $age_group )", xlab = "Age Group", ylab = "Relative Häufigkeit", cex.names = 0.8, col = "orchid3")
 ```
 
 
