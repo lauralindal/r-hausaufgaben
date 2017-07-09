@@ -62,8 +62,9 @@ Wir untersuchen, ob sich die Überlebenschancen weiblicher und männlicher Passa
 a) Stellen Sie die Kontingenztabelle der absoluten Häufigkeiten von `Survived2` und `Sex` auf!
 
 ```{r}
+library(knitr)
 h_surv_gender <- table(titanic_data$Survived2, titanic_data$Sex)
-addmargins(h_surv_gender)
+kable(addmargins(h_surv_gender))
 ```
 
 
@@ -71,7 +72,7 @@ b) Stellen Sie die Kontingenztabelle der relativen Häufigkeiten von `Survived2`
 
 ```{r}
 f_surv_gender <- prop.table(h_surv_gender)
-round(addmargins(f_surv_gender)*100, digits = 2)
+kable(round(addmargins(f_surv_gender)*100, digits = 2))
 ```
 
 
@@ -81,19 +82,48 @@ c) Berechnen Sie folgende bedingte relative Häufigkeiten in Prozent:
     iii) f(Sex = female | Survived2 = yes)
     iv) f(Sex = male | Survived2 = yes)
     
+    ```{r}
+    # f(Survived2 = yes | Sex = female)
+    i1 <- round((0.2615 / 0.3524)*100, 2)
     
-```{r}
+    # f(Survived2 = yes | Sex = male)
+    i2 <- round((0.1223 / 0.6476)*100, 2)
+    
+    # f(Sex = female | Survived2 = yes)
+    i3 <- round((0.2615 / 0.3838)*100, 2)
+    
+    # f(Sex = male | Survived2 = yes)
+    i4 <- round((0.1223 / 0.3838)*100, 2)
+    ```
 
-```
-
+  Unter den Frauen haben `r i1` % überlebt.
+  Unter den Männern haben `r i2` % überlebt.
+  Unter den Überlebenden waren `r i3` % Frauen.
+  Unter den Überlebenden waren `r i4` % Männer.
     
 d) Welche der relativen Häufigkeiten in c) beschreiben die Überlebenschance von Frauen bzw. von Männern?
 
+  Die relativen Häufigkeiten über die Zeile "survived"=yes gibt uns hier die korrekte Auskunft. Frauen haben zu `r i3`% überlebt und Männer zu `r i4`%.
+
 e) Generieren Sie einen Mosaikplot der Merkmale `Survived2` und `Sex`. Spalten Sie dabei erst nach `Sex` auf, dann nach `Survived2`. Beschriften Sie die Achsen und vergeben Sie einen sinnvollen Titel! 
+
+```{r}
+mosaicplot(Sex ~ Survived2, data = titanic_data, main = "Überlebende auf der Titanic - Mosaikplot", 
+           ylab="Überlebt?", xlab="Geschlecht", col = c("turquoise", "palegreen1"))
+```
+
 
 f) Berechnen Sie den Phi-Koeffizienten von `Survived2` und `Sex`! Was misst dieser? Was sagt uns in diesem Fall der Wert von Phi?
 
+```{r}
+library(DescTools)
+p <- Phi(titanic_data$Survived2, titanic_data$Sex)
+```
+Phi gibt an, wie stark die statistische Abhängigkeit zwischen zwei Merkmalen ist. Phi kann zwischen 0 und 1 (starke Abhängigkeit) liegen. Mit `r p` liegt Phi so gerade noch im Bereich des mittelstarken Zusammenhangs.
+
 g) Sind die Merkmale `Survived2` und `Sex` statistisch unabhängig voneinander? Begründen Sie Ihre Antwort!
+
+Die Merkmale sind nicht statistisch unabhängig voneinander. Wir können das sowohl an dem Mosaikplot erkennen (es befinden sich hier keine geraden Schnitte) als auch an dem Phi-Koeffizienten (er liegt im Bereich des mittelstarken Zusammenhangs).
 
 
 ## Aufgabe 2 (9 Punkte)
@@ -102,9 +132,37 @@ Wir untersuchen, ob die Überlebenschancen männlicher und weiblicher Passagiere
 
 a) Generieren Sie Mosaikplots der Merkmale `Survived2` und `Sex` wie in Aufgabe 1e), jeweils einen für die Passagiere der Klasse 1, 2 und 3! Beschriften Sie die Achsen und vergeben Sie einen sinnvollen Titel!
 
+```{r}
+klasse1 <- subset(titanic_data, Pclass == "1")
+klasse2 <- subset(titanic_data, Pclass == "2")
+klasse3 <- subset(titanic_data, Pclass == "3")
+
+tab_1 <- table(klasse1$Sex, klasse1$Survived2)
+tab_2 <- table(klasse2$Sex, klasse2$Survived2)
+tab_3 <- table(klasse3$Sex, klasse3$Survived2)
+
+mosaicplot(tab_1, xlab = "Gender", ylab = "Survived?", main = "Survivors in First Class", col = c("pink", "hotpink3"))
+mosaicplot(tab_2, xlab = "Gender", ylab = "Survived?", main = "Survivors in Second Class", col = c("lightgreen", "green3"))
+mosaicplot(tab_3, xlab = "Gender", ylab = "Survived?", main = "Survivors in Third Class", col = c("mediumpurple1", "mediumorchid4"))
+```
+
+
 b) Berechnen Sie den Phi-Koeffizienten von `Survived2` und `Sex` jeweils für Klasse 1, 2 und 3! 
 
-c) Was bedeutet es, dass der Phi-Koeffizient für Klasse 1 größer ist als für die anderen beiden Klassen?
+```{r}
+p1 <- Phi(klasse1$Sex, klasse1$Survived2)
+p2 <- Phi(klasse2$Sex, klasse2$Survived2)
+p3 <- Phi(klasse3$Sex, klasse3$Survived2)
+
+p1
+p2
+p3
+```
+
+
+c) Was bedeutet es, dass der Phi-Koeffizient für Klasse 2 größer ist als für die anderen beiden Klassen?
+
+In der zweiten Klasse war das Geschlecht der Reisenden am Relevantesten für deren Überleben (im Vergleich zu den anderen Klassen). Es besteht hier nämlich ein starker Zusammenhang (`r p2`) zwischen Geschlecht und Überleben. Bei der ersten Klasse ist der Zusammenhang zwischen Geschlecht und Überleben noch mäßig relevant (`r p1`). In der dritten Klasse besteht zwischen den beiden Merkmalen nur noch ein schwacher Zusammenhang (`r p3`).
 
 ## Aufgabe 3 (12 Punkte)
 
@@ -117,7 +175,7 @@ a) Gruppieren Sie `Age` wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle
     ```{r}
     # Gruppierung von Age
     bins <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80)
-    age_group <- table(cut(titanic_data$Age, breaks = bins))
+    age_group <- table(cut(titanic_data$Age, breaks = bins, include.lowest = TRUE, right = FALSE))
 
     # Anlegen und Befüllen der Spalte 'AgeGroup'
     library(TeachingDemos)
@@ -126,53 +184,56 @@ a) Gruppieren Sie `Age` wie in Aufgabe 3 der ersten Hausarbeit in die Intervalle
       if(is.na(titanic_data[i, 6])){
         titanic_data[i, 14] <- NA
       }
-      else if(0.0 %<% titanic_data[i, 6] %<=%5.0){
-        titanic_data[i, 14] <- "(0,5]"
+      else if(0.0 %<=% titanic_data[i, 6] %<%5.0){
+        titanic_data[i, 14] <- "[0,5)"
       }
-      else if (5.0 %<% titanic_data[i, 6] %<=%10.0){
-        titanic_data[i, 14] <- "(5,10]"
+      else if (5.0 %<=% titanic_data[i, 6] %<%10.0){
+        titanic_data[i, 14] <- "[5,10)"
       }
-      else if (10.0 %<% titanic_data[i, 6] %<=%15.0){
-        titanic_data[i, 14] <- "(10,15]"
+      else if (10.0 %<=% titanic_data[i, 6] %<%15.0){
+        titanic_data[i, 14] <- "[10,15)"
       }
-      else if (15.0 %<% titanic_data[i, 6] %<=%20.0){
-        titanic_data[i, 14] <- "(15,20]"
+      else if (15.0 %<=% titanic_data[i, 6] %<%20.0){
+        titanic_data[i, 14] <- "[15,20)"
       }
-      else if (20.0 %<% titanic_data[i, 6] %<=%25.0){
-        titanic_data[i, 14] <- "(20,25]"
+      else if (20.0 %<=% titanic_data[i, 6] %<%25.0){
+        titanic_data[i, 14] <- "[20,25)"
       }
-      else if (25.0 %<% titanic_data[i, 6] %<=%30.0){
-        titanic_data[i, 14] <- "(25,30]"
+      else if (25.0 %<=% titanic_data[i, 6] %<%30.0){
+        titanic_data[i, 14] <- "[25,30)"
       }
-      else if (30.0 %<% titanic_data[i, 6] %<=%35.0){
-        titanic_data[i, 14] <- "(30,35]"
+      else if (30.0 %<=% titanic_data[i, 6] %<%35.0){
+        titanic_data[i, 14] <- "[30,35)"
       }
-      else if (35.0 %<% titanic_data[i, 6] %<=%40.0){
-        titanic_data[i, 14] <- "(35,40]"
+      else if (35.0 %<=% titanic_data[i, 6] %<%40.0){
+        titanic_data[i, 14] <- "[35,40)"
       }
-      else if (40.0 %<% titanic_data[i, 6] %<=%45.0){
-        titanic_data[i, 14] <- "(40,45]"
+      else if (40.0 %<=% titanic_data[i, 6] %<%45.0){
+        titanic_data[i, 14] <- "[40,45)"
       }
-      else if (45.0 %<% titanic_data[i, 6] %<=%50.0){
-        titanic_data[i, 14] <- "(45,50]"
+      else if (45.0 %<=% titanic_data[i, 6] %<%50.0){
+        titanic_data[i, 14] <- "[45,50)"
       }
-      else if (50.0 %<% titanic_data[i, 6] %<=%55.0){
-        titanic_data[i, 14] <- "(50,55]"
+      else if (50.0 %<=% titanic_data[i, 6] %<%55.0){
+        titanic_data[i, 14] <- "[50,55)"
       }
-      else if (55.0 %<% titanic_data[i, 6] %<=%60.0){
-        titanic_data[i, 14] <- "(55,60]"
+      else if (55.0 %<=% titanic_data[i, 6] %<%60.0){
+        titanic_data[i, 14] <- "[55,60)"
       }
-      else if (60.0 %<% titanic_data[i, 6] %<=%65.0){
-        titanic_data[i, 14] <- "(60,65]"
+      else if (60.0 %<=% titanic_data[i, 6] %<%65.0){
+        titanic_data[i, 14] <- "[60,65)"
       }
-      else if (65.0 %<% titanic_data[i, 6] %<=%70.0){
-        titanic_data[i, 14] <- "(65,70]"
+      else if (65.0 %<=% titanic_data[i, 6] %<%70.0){
+        titanic_data[i, 14] <- "[65,70)"
       }
-      else if (70.0 %<% titanic_data[i, 6] %<=%75.0){
-        titanic_data[i, 14] <- "(70,75]"
+      else if (70.0 %<=% titanic_data[i, 6] %<%75.0){
+        titanic_data[i, 14] <- "[70,75)"
       }
-      else if (75.0 %<% titanic_data[i, 6] %<=%80.0){
-        titanic_data[i, 14] <- "(75,80]"
+      else if (75.0 %<=% titanic_data[i, 6] %<%80.0){
+        titanic_data[i, 14] <- "[75,80)"
+      }
+      else if (80.0 %<=% titanic_data[i, 6] %<%85.0){
+        titanic_data[i, 14] <- "[80,85)"
       }
     }
     ```
@@ -182,18 +243,18 @@ b) Berechnen Sie für jede Altersgruppe [0,5), [5,10) usw. die Überlebenschance
 ```{r}
 # Erstelle Kontingenztabelle / absolute Häufigkeiten
 h_age_survival <- table(titanic_data$AgeGroup, titanic_data$Survived2)
-addmargins(h_age_survival)
+kable(addmargins(h_age_survival))
 
 # Ermittle gemeinsame relative Häufigkeiten
 f_age_survival <- prop.table(h_age_survival)
 f_age_survival_margins <- addmargins(f_age_survival)
-round(f_age_survival_margins*100, 2)
+kable(round(f_age_survival_margins*100, 2))
 
 # Ermittle bedingte relative Häufigkeiten f($age_group | survived)
 h_survivors <- matrix(h_age_survival[,2], nrow = 16, ncol = 1,  dimnames=list(c("(0,5]", "(5,10]", "(10,15]", "(15,20]", "(20,25]", "(25,30]", "(30,35]", "(35,40]", "(40,45]", "(45,50]", "(50,55]", "(55,60]", "(60,65]", "(65,70]", "(70,75]", "(75,80]"), c("Survived")))
 f_survivors <- prop.table(h_survivors)
 f_survivors_rounded <- round(f_survivors * 100, 2)
-f_survivors_rounded
+kable(f_survivors_rounded)
 ```
 
 
